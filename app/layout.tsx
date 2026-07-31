@@ -10,9 +10,17 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.quilters.studio"),
   title: "Mary Anne Quilts",
   description:
     "Mary Anne Henderson — quilter, Marietta, Georgia. Fifty years of scraps: the quilts, the design process, and the journal.",
+  openGraph: {
+    title: "Mary Anne Quilts",
+    description: "They stick to me like lint. Fifty years of scrap quilts, and the stories behind them.",
+    url: "https://www.quilters.studio",
+    siteName: "Mary Anne Quilts",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

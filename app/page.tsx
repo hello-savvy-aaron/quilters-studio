@@ -104,7 +104,7 @@ export default function Home() {
           <figure style={{ margin: 0 }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="https://blogger.googleusercontent.com/img/a/AVvXsEggN-zh7EPn-958FTSq4YEnNXgFGsYiWRaG3ru0o6_ljZ_lk9P8s0nmiOPA_-2JGj2LaJ85l1uWEAHtIpsXrBnkzfV8UY4F7VnF70UTlgzEKmHPzwSctKeLLUB_VETzdWx3_H-Q4d7DWMUo7aHlIc8RVX6vs2waQGht0Maw0Nn5z4uEp8M4ns5mudtU3vo"
+              src="/quilts/sock-hop-1.jpg"
               alt="Sock Hop, a scrap quilt of 3,500 pieces"
               style={{ width: "100%", height: "auto" }}
             />
@@ -232,7 +232,7 @@ export default function Home() {
             <figure style={{ margin: 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://blogger.googleusercontent.com/img/a/AVvXsEit2Zmx6nC5TIq8zUuoUWG1qlcaNMk0pW7P2RvOYgsPlbvCXzTkm8pHxiuTBMJyaFLSvVFkEY5X6bnxiIHyj5Hl9UmzqFSolfxI4SqEFaNqPAW5mMeyQMq2iZRXpX5BFupjdpx4SLOL8jWbt4l68gTSKe-VacBjen1Zt2yzQca7zPMzs_aFU8SgvRNPV0o"
+                src="/quilts/about-dragon.jpg"
                 alt="Mary Anne with her dragon quilt, fifteen years ago"
                 style={{ width: "100%", height: "auto" }}
               />
@@ -241,7 +241,7 @@ export default function Home() {
             <figure style={{ margin: 0 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://blogger.googleusercontent.com/img/a/AVvXsEh6HDWbNbcFamOe7ZsVHNJvCUghbGhtL4k0hlch2Pbz3teC9WjbJpSb6U-jZ-PIvyQg2dEVg1SKKHSOjCXTwW-uW8VNgbRo87hpfow72dhgx6wioATubOYjRJSm_g2YC6hlCnD1Vl29UHAi6kCh_jeIXgdFrSybhEOBI7Bmot3a9Qa3PS7v8HYIKtx0sF0"
+                src="/quilts/about-now.jpg"
                 alt="Mary Anne today"
                 style={{ width: "100%", height: "auto" }}
               />

@@ -93,7 +93,6 @@ export default async function OgImage() {
             borderLeft: "6px solid #201e1d",
           }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={photoSrc}
             alt=""

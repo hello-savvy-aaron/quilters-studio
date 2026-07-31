@@ -1,5 +1,3 @@
-const IMG = "https://blogger.googleusercontent.com/img/a/";
-const IMGB = "https://blogger.googleusercontent.com/img/b/R29vZ2xl/";
 
 export type QuiltImage = { src: string; alt: string; cap?: number };
 
@@ -22,26 +20,26 @@ export const quilts: Quilt[] = [
     gridNote: "A quilted car cover · guild project, St. Petersburg & Marietta",
     gridTag: "Two versions",
     cover: {
-      src: IMG + "AVvXsEgcNA4i8akAR-bSpw0ZOwhoksFQpendpdQRVM5uXDpTHy7FQU1qQQKRKmSv0rO5Zdw0cBSxYa6MfwemAfkRe5rL9SL84rzgR0SQOVNh8vKApfiBVoNrqgw3ejDTIiZPdqxjqzj9Rf1TK_ShkFl2Rnou6xTAj6VpnSVn-3yewHTPwAicUPUsqi-vHSRkpRU",
+      src: "/quilts/quilty-1.jpg",
       alt: "Quilty McQuiltface, a quilted car cover",
     },
     images: [
       {
-        src: IMG + "AVvXsEgcNA4i8akAR-bSpw0ZOwhoksFQpendpdQRVM5uXDpTHy7FQU1qQQKRKmSv0rO5Zdw0cBSxYa6MfwemAfkRe5rL9SL84rzgR0SQOVNh8vKApfiBVoNrqgw3ejDTIiZPdqxjqzj9Rf1TK_ShkFl2Rnou6xTAj6VpnSVn-3yewHTPwAicUPUsqi-vHSRkpRU",
+        src: "/quilts/quilty-1.jpg",
         alt: "Version 1 — the drivable car cover",
       },
       {
-        src: IMG + "AVvXsEjElOI2jvdsen5CKSgmM4xYL97JQCeOaI4r-RutDF9xj5JfTjnF6HxmHKs9O8JiQhg6D-mA9JtKBJb5hBVkWerLJKtQtcG0dIii0Lal0bHjVcZ7LzSfxcA9tTq7R0-85aR5O6CpwDM4jYtMql6n8no17E3L7ZEtp-Ky0ZCdrh3AUvWZAyzS44sxnwm9Xhk",
+        src: "/quilts/quilty-2.jpg",
         alt: "Version 2 — enlarged for a van, with portraits on the black fabric windows",
         cap: 349,
       },
       {
-        src: IMG + "AVvXsEhjppzjWo2feP6StKo96uMNLEHjxtpsAEcKtPmU63AogL_-GWos6pUTfPGM5KktJ8z8JRZ405nzDUX3ZQLOfuGm353OjC_kh3JmT8NIB5ai-Egha4id6kvrAnUP2FT-4P-6QMLy7EW_6Wg6pKnqKaioRUkSbM1tzlzefty_yY3sQC5v9ppljXZAu1p2Vmk",
+        src: "/quilts/quilty-3.jpg",
         alt: "Quilty out on display",
         cap: 419,
       },
       {
-        src: IMG + "AVvXsEilBDe0YxB_g78F-IQmBilHG4C7nv9KnnujyF-Ih8If8rJoHRP15NwPYeR0HtKVESg1QGSqJNNyxbQV3wfKshkc--aj1itSCgmtxswBphXrvKidWyI5_DPTqHvifS3FEc7I0_rZcBmFP8z89MOT7x4YX726hLvyNloW_GQWRhtHSxlvS--5LFgtQ743NYA",
+        src: "/quilts/quilty-4.jpg",
         alt: "The makers, pieced in",
         cap: 416,
       },
@@ -60,26 +58,26 @@ export const quilts: Quilt[] = [
     gridNote: "Scraps, satin stitch · 92 × 82 in · 3,500 pieces",
     gridTag: "1994",
     cover: {
-      src: IMG + "AVvXsEggN-zh7EPn-958FTSq4YEnNXgFGsYiWRaG3ru0o6_ljZ_lk9P8s0nmiOPA_-2JGj2LaJ85l1uWEAHtIpsXrBnkzfV8UY4F7VnF70UTlgzEKmHPzwSctKeLLUB_VETzdWx3_H-Q4d7DWMUo7aHlIc8RVX6vs2waQGht0Maw0Nn5z4uEp8M4ns5mudtU3vo",
+      src: "/quilts/sock-hop-1.jpg",
       alt: "Sock Hop scrap quilt",
     },
     images: [
       {
-        src: IMG + "AVvXsEggN-zh7EPn-958FTSq4YEnNXgFGsYiWRaG3ru0o6_ljZ_lk9P8s0nmiOPA_-2JGj2LaJ85l1uWEAHtIpsXrBnkzfV8UY4F7VnF70UTlgzEKmHPzwSctKeLLUB_VETzdWx3_H-Q4d7DWMUo7aHlIc8RVX6vs2waQGht0Maw0Nn5z4uEp8M4ns5mudtU3vo",
+        src: "/quilts/sock-hop-1.jpg",
         alt: "Sock Hop, 92 × 82 inches",
       },
       {
-        src: IMG + "AVvXsEg_woZ8dkdn7AatdQrx6-Iy7nR8tsPS66L02HOioKqff6OK8GHEPzXWWpW6pe-VVuXyjVfoysJJeMRk2iBmU1wldlbfCz9_1rz_uI51K-AOXaVXuGHOjn-H5n221sreLh76IM71-BsDW9-HAgWf3MyAKk-spmNIrCSws_g-YFC90NP9SZzrDVz0gFctEOI",
+        src: "/quilts/sock-hop-2.jpg",
         alt: "The poem written on the back",
         cap: 537,
       },
       {
-        src: IMG + "AVvXsEge34Q3LBmAZxZ3U8Q5V5a4n7LHvlWyy0BM-tEjoaJzwhfmehy0BrrlpNWU-EqQdlxmmiY4I7n5cMPRlrLZMXer5P2KReZS35iCB_U67BNy4sHHuML0esvmVbJ6HoHiA1o3UU5yNQoSjkU4HYF9e7b7nEKPMQ2ZlIKkxcNTVLeW1QbR7sXQ8Ilg2eq_SbI",
+        src: "/quilts/sock-hop-3.jpg",
         alt: "Detail",
         cap: 278,
       },
       {
-        src: IMG + "AVvXsEjKSHdBzAWd6bIUeZDvZxy5-zXHnW6LkdYGDsQMGmfeFoh7TZs7CnfWPYiaxwUi-utTF4h5j4Y4HRmURyYmqCXK-ccH_0NcJlqhnfB7YE7fbwSg_KIcovVYJeJl_xpmGAitaIF7mtdJWno07oXw7hul--wENR75373CYqgP7wW0sJk1KBbh03FRWS8MgjU",
+        src: "/quilts/sock-hop-4.jpg",
         alt: "The graffiti backing fabric",
         cap: 278,
       },
@@ -98,27 +96,27 @@ export const quilts: Quilt[] = [
     gridNote: "Antique red buttons for the cherry on top",
     gridTag: "Bali batiks",
     cover: {
-      src: IMG + "AVvXsEjZi44LUzwEuym-vs4Vf5FZmFQwJgXtH7jE7pM3Kj4EFodC6UWjy6iBzEf7gGjmp12h8FWRUETa5BAWlxg5JkyhW8u90AMlVQLCWi_ycw-_CKi1IOh_sXqJj0v9OY72MTaFp650gUnliCx4mxrJonsscEzlrTA7npWP1fGhdIJsOHy2Lt2Y0tzjD7x6T2A",
+      src: "/quilts/i-scream-1.jpg",
       alt: "I Scream, You Scream — ice cream cone quilt in batiks",
     },
     images: [
       {
-        src: IMG + "AVvXsEjZi44LUzwEuym-vs4Vf5FZmFQwJgXtH7jE7pM3Kj4EFodC6UWjy6iBzEf7gGjmp12h8FWRUETa5BAWlxg5JkyhW8u90AMlVQLCWi_ycw-_CKi1IOh_sXqJj0v9OY72MTaFp650gUnliCx4mxrJonsscEzlrTA7npWP1fGhdIJsOHy2Lt2Y0tzjD7x6T2A",
+        src: "/quilts/i-scream-1.jpg",
         alt: "The ice cream cone quilt",
         cap: 417,
       },
       {
-        src: IMG + "AVvXsEjwnDM0pz69MiVHI82jGqsBGmnM-y5OA_DOeeFQkKeNsNUuzI4xPCw7bGKEax8pw4p6dCHNKoUBLHZjH2TWy4baXA6dN80d9w6MkGxs9PFEFVlCrteEzwR9OZHGo7f8SP34rp1UQK8_0Ou6ZZrjojN281dTDxlLnzjUniny4aa1iN0ybbP0svQi4n-olHA",
+        src: "/quilts/i-scream-2.jpg",
         alt: "Detail — an antique red button for the cherry on top",
         cap: 346,
       },
       {
-        src: IMG + "AVvXsEjEQ4yw4gMAtusgXzXn28RV30iOXub9XTWB3GusWh6KVpLU8JGMXmBC0gWR6dGLBc7Yqc-1lS0uvxJAfya8alXhHafhQ6zSVZbuyOoTNCAb12pVhcynKtbVQ4Tu8DpJKPfnepes77C2RnbXJZD288MWuSvxvBUiXlWP5HsWz49T-aRMp_73rSd0T0SIBgg",
+        src: "/quilts/i-scream-3.jpg",
         alt: "In Patchwork Quilts magazine",
         cap: 430,
       },
       {
-        src: IMG + "AVvXsEjhAfFDdENyLzQ3DvnrjYqC-YMCqNnIb9_6WsLrLDhzpIXOoQsGxKBcIjfiZC6Qq7BbLXON9Z2SVu6DKWfGxGoQzxsDzLEEtQrWx_RGyWRxFlihCVyRg77d97oVFB6oyNOw5cgl8s88T9Iv9vQisOctHRV3UfpBPJch21aEbtd1y_dozDImVlM-m8FiMdk",
+        src: "/quilts/i-scream-4.jpg",
         alt: "In Georgia Bonesteel’s “Quiltmaking Legacy”",
         cap: 422,
       },
@@ -137,24 +135,24 @@ export const quilts: Quilt[] = [
     gridNote: "Embroidered linens and flea-market finds · quilted by my mother",
     gridTag: "Early work",
     cover: {
-      src: IMGB + "AVvXsEjIUQs9hWg1X8l5PkOsFxcJ9OGu5zGEmKidyQjvVDB2tFqs61Z3pOIA3encbT_PJvBUXR0XyS-WLiI_nfLYLCA-AfubBh-lH7F1Sn0Fp9zNZiTYkvBgOhywAFGByqzY2v0ofOeTV3yfjzHd_D6cMzon0QddlHkTvycss9yf2oS2nBI19BhQjYRTlPSZu5Y/s1024/IMG_0720.jpeg",
+      src: "/quilts/sunbonnet-sue-1.jpg",
       alt: "My Sunbonnet Sue quilt detail",
     },
     images: [
       {
-        src: IMGB + "AVvXsEjIUQs9hWg1X8l5PkOsFxcJ9OGu5zGEmKidyQjvVDB2tFqs61Z3pOIA3encbT_PJvBUXR0XyS-WLiI_nfLYLCA-AfubBh-lH7F1Sn0Fp9zNZiTYkvBgOhywAFGByqzY2v0ofOeTV3yfjzHd_D6cMzon0QddlHkTvycss9yf2oS2nBI19BhQjYRTlPSZu5Y/s1024/IMG_0720.jpeg",
+        src: "/quilts/sunbonnet-sue-1.jpg",
         alt: "Sunbonnet Sue, detail",
       },
       {
-        src: IMGB + "AVvXsEjW3NgOPTXjn2ev0pXMGsj8fClWsbLksBJVLVcScSO17CideH8qKjQevH0cIv1DUtPv8wuhzX4__BrSnl82pqny7Qa6RlZHAVUdl4sT3MTc4OiEe7GRu8mxmKuH_S69nPUtK79f_IDlDBiedARP_IlMkSFstQseUg-9XLspPkqwPO1zQtVFoD1yfAupmXM/s1024/IMG_0721.jpeg",
+        src: "/quilts/sunbonnet-sue-2.jpg",
         alt: "Embroidered linens, worn and re-used",
       },
       {
-        src: IMGB + "AVvXsEihgpl_Onm7q9tRhWczKxx_i-JcMLpRyDSSVhAzhPRF44G4wNGOiT4fwLp62pjzxiWgrHR0d1Om70Nm4mkEUf6TVNM1T2RceIR-DRsqjPD3rbn_21fVE9Ojk2VtR-_hc8t_NvGTsTtQFOze5iai4pmByQEx4T1VO-2PdtEcLlzuTPNCENPQpaN0z6B8jxY/s1024/IMG_0722.jpeg",
+        src: "/quilts/sunbonnet-sue-3.jpg",
         alt: "Hand quilting by my mother",
       },
       {
-        src: IMGB + "AVvXsEhquGg7782JovC402DGcRbpYYidDc2KnG4krcNwQnD4MU9yv1cFThdzKt6hci7hDiNkgGKrRLjJCV6ymo0vF-WOEnPTy5VN1US7kdZXLENjZq_enHjfUmaEcni9-hPs1fuu5LzqPQA9Xdt_hLp4jLfGqS3r2DMOHjRE-07mBTFe9pA3f-pYjDHJxQGKMmE/s1024/IMG_0719.jpeg",
+        src: "/quilts/sunbonnet-sue-4.jpg",
         alt: "The whole quilt",
       },
     ],
@@ -171,17 +169,17 @@ export const quilts: Quilt[] = [
     gridNote: "Bali Fabrications scraps · taken apart once, and better for it",
     gridTag: "Wall quilt",
     cover: {
-      src: IMG + "AVvXsEjDBrgNxR9ZkCicqCkcvaWuJNSmFMXUjUET3uWdJszeTJ-0sItMUgbTQiez-fv-9sQzEf2bLv3_cMqBz0F6yAdm8GLGP-eQL2ioOYtE75eCIhAnodyEeWBjp5p3ytRE0pd0xSG_jJILNtm4DZNVVsDFLClUj57daF4HOZ9hOInAhGNMMoWDeDhzLolFbbQ",
+      src: "/quilts/light-twinkle-1.jpg",
       alt: "Bali scrap wall quilt with filtered light",
     },
     images: [
       {
-        src: IMG + "AVvXsEjDBrgNxR9ZkCicqCkcvaWuJNSmFMXUjUET3uWdJszeTJ-0sItMUgbTQiez-fv-9sQzEf2bLv3_cMqBz0F6yAdm8GLGP-eQL2ioOYtE75eCIhAnodyEeWBjp5p3ytRE0pd0xSG_jJILNtm4DZNVVsDFLClUj57daF4HOZ9hOInAhGNMMoWDeDhzLolFbbQ",
+        src: "/quilts/light-twinkle-1.jpg",
         alt: "The finished wall quilt",
         cap: 406,
       },
       {
-        src: IMG + "AVvXsEiRUAaNusQtiNpTmF-AGThGo9GzZtWGGHOBQDdQ3GsgoDh6d0XXxxhKAxnoz1FwRAWBpKHbXeTPdB7FFDL7NN-FiWBEzqw3wf7jg9sgAvxjdz7dqrtUgHoMvG1CiTJ-z1lcw338tT1OA2YzcmF-Z_DqaKbOsVXnOvaagwPJ3jnrhQiHS8_0OrBk6dFqGj8",
+        src: "/quilts/light-twinkle-2.jpg",
         alt: "Chopped corners filled with bright scraps",
         cap: 284,
       },

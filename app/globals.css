@@ -123,23 +123,43 @@ figcaption {
 .muted-65 { color: color-mix(in srgb, var(--color-text) 65%, transparent); }
 .muted-72 { color: color-mix(in srgb, var(--color-text) 72%, transparent); }
 
-.grid-hero {
+/* Home opens with the biography: text left, two portraits right. */
+.grid-bio {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: 60px;
-  align-items: center;
-  padding: 60px 0 80px;
+  align-items: start;
+  padding: 60px 0 0;
 }
-.grid-design { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 60px; align-items: start; }
-.grid-about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 60px; align-items: start; }
+.grid-portraits { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+.grid-more { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: start; }
 .grid-contact { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 60px; align-items: start; }
 .grid-quilts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
 .grid-journal { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 60px; }
 .grid-detail { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 60px; align-items: start; }
 
+/* Inner pages. */
+.grid-essay {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 60px;
+  align-items: start;
+  padding: 60px 0 0;
+}
+.essay-aside { position: sticky; top: 90px; }
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+  padding: 60px 0 0;
+}
+
 @media (max-width: 960px) {
   .shell { padding: 0 20px 80px; }
-  .grid-hero, .grid-design, .grid-about, .grid-contact, .grid-detail { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .grid-bio, .grid-more, .grid-contact, .grid-detail, .grid-essay { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .essay-aside { position: static; }
   .grid-quilts, .grid-journal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .nav-links { gap: 15px !important; flex-wrap: wrap; }
 }

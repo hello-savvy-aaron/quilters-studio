@@ -1,125 +1,93 @@
+import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
-import DesignWall from "@/components/DesignWall";
 import QuiltGallery from "@/components/QuiltGallery";
 import { journalPosts } from "@/lib/quilts";
 
+const paragraph = { fontSize: 16, lineHeight: 1.65, maxWidth: "58ch" } as const;
+
 export default function Home() {
+  const recent = journalPosts.slice(0, 3);
+
   return (
-    <div className="shell">
-      <header
-        style={{
-          position: "sticky",
-          top: 0,
-          zIndex: 40,
-          display: "flex",
-          alignItems: "baseline",
-          justifyContent: "space-between",
-          gap: 40,
-          padding: "20px 0 15px",
-          background: "var(--color-bg)",
-        }}
-      >
-        <a href="#top" style={{ fontSize: 19, letterSpacing: "-0.01em", color: "var(--color-text)" }}>
-          Mary Anne Quilts
-        </a>
-        <nav
-          className="nav-links"
-          style={{ display: "flex", gap: 30, fontSize: 13, letterSpacing: "0.02em" }}
-        >
-          <a href="#work" style={{ color: "var(--color-text)" }}>
-            Quilts
-          </a>
-          <a href="#design" style={{ color: "var(--color-text)" }}>
-            On design
-          </a>
-          <a href="#journal" style={{ color: "var(--color-text)" }}>
-            Journal
-          </a>
-          <a href="#about" style={{ color: "var(--color-text)" }}>
-            About
-          </a>
-          <a href="#contact" style={{ color: "var(--color-accent)" }}>
-            Say hello
-          </a>
-        </nav>
-      </header>
-
-      <section id="top">
-        <div style={{ height: 4, background: "var(--color-text)" }} />
-        <div
-          className="overline muted-60"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 20,
-            padding: "8px 0",
-            flexWrap: "wrap",
-          }}
-        >
-          <span>Mary Anne Henderson · Quilter</span>
-          <span>Marietta, Georgia</span>
-          <span>Fifty years of scraps</span>
-        </div>
-        <div style={{ height: 1, background: "var(--color-text)" }} />
-
-        <div className="grid-hero">
-          <div>
-            <h1
-              style={{
-                fontSize: "clamp(46px, 6vw, 98px)",
-                lineHeight: 0.98,
-                letterSpacing: "-0.03em",
-                margin: "0 0 30px",
-                maxWidth: "13ch",
-                textWrap: "pretty",
-              }}
-            >
-              They stick to me like lint.
-            </h1>
-            <p style={{ fontSize: 20, lineHeight: 1.5, maxWidth: "46ch", margin: "0 0 20px" }}>
-              In the back of my mind, I&apos;m always collecting bits and images to use in a quilt.
-              Often it&apos;s a simple thing, like the perfect gold streak in a salmon sky. Or the joy
-              of a small school with kids playing in the yard.
-            </p>
-            <p style={{ fontSize: 20, lineHeight: 1.5, maxWidth: "46ch", margin: "0 0 30px" }}>
-              Then, one day, these bits begin to join hands.
-            </p>
-            <p
-              className="muted-72"
-              style={{ fontSize: 15, lineHeight: 1.6, maxWidth: "52ch", margin: "0 0 30px" }}
-            >
-              Hello, I&apos;m Mary Anne Henderson. I&apos;ve been quilting for over fifty years, and
-              my family urged me to share some of my favorites. So here they are.
-            </p>
-            <div style={{ display: "flex", gap: 15, alignItems: "center" }}>
-              <a className="btn btn-primary" href="#work">
-                See the quilts
-              </a>
-              <a className="btn btn-secondary" href="#design">
-                How a quilt starts
-              </a>
-            </div>
+    <>
+      {/* Who she is — the site opens with the biography. */}
+      <section id="about" className="grid-bio">
+        <div>
+          <p className="overline" style={{ color: "var(--color-accent)", margin: "0 0 20px" }}>
+            Hello, I&apos;m Mary Anne Henderson
+          </p>
+          <h1
+            style={{
+              fontSize: "clamp(40px, 5vw, 78px)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.03em",
+              margin: "0 0 30px",
+              maxWidth: "17ch",
+              textWrap: "pretty",
+            }}
+          >
+            My mother taught me to sew when I was about ten.
+          </h1>
+          <p style={{ fontSize: 20, lineHeight: 1.5, maxWidth: "46ch", margin: "0 0 30px" }}>
+            I&apos;ve been quilting for over fifty years, and my family urged me to share some of my
+            favorites. So here they are.
+          </p>
+          <p style={paragraph}>
+            She lost her mother when she was five and was raised by her dad and older brothers on a
+            small farm — depression-era not-quite-poverty. I saw the farmhouse when I was little and
+            found it shockingly plain and small; her three or four dresses had fit on a few nails in
+            the wall.
+          </p>
+          <p style={paragraph}>
+            After high school she went to live with a beloved aunt in St. Louis, who was a veritable
+            Martha Stewart and taught her all the household arts, including sewing. I think she
+            became a whole new person in those years. Later, Mom taught me and my sister how to sew
+            clothes and make quilts from the scraps.
+          </p>
+          <p style={paragraph}>
+            Since then: fifty years of quilting, a stretch working for Bali Fabrications in the San
+            Francisco Bay Area, a shop in Marietta, Georgia, a quilt guild in St. Petersburg,
+            Florida — and one rescue poodle, Cookie, who is pieced into the car cover.
+          </p>
+          <p className="muted-65" style={{ fontSize: 15, lineHeight: 1.6, maxWidth: "58ch" }}>
+            I love the scrap quilts best of all. I don&apos;t know why the quilts I make often get so
+            big.
+          </p>
+          <div style={{ display: "flex", gap: 15, alignItems: "center", marginTop: 30, flexWrap: "wrap" }}>
+            <a className="btn btn-primary" href="#quilts">
+              See the quilts
+            </a>
+            <Link className="btn btn-secondary" href="/on-design">
+              How a quilt starts
+            </Link>
           </div>
+        </div>
 
-          <figure style={{ margin: 0 }}>
+        <div className="grid-portraits">
+          <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/quilts/sock-hop-1.jpg"
-              alt="Sock Hop, a scrap quilt of 3,500 pieces"
+              src="/quilts/about-dragon.jpg"
+              alt="Mary Anne with her dragon quilt, fifteen years ago"
               style={{ width: "100%", height: "auto" }}
             />
-            <figcaption
-              className="overline"
-              style={{ display: "flex", justifyContent: "space-between", gap: 20, marginTop: 10 }}
-            >
-              <span>Sock Hop, 1994 · 92 × 82 in</span>
-              <span style={{ color: "var(--color-accent)" }}>3,500 pieces</span>
-            </figcaption>
+            <figcaption>Fifteen years ago, with the dragon quilt.</figcaption>
+          </figure>
+          <figure>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/quilts/about-now.jpg"
+              alt="Mary Anne today"
+              style={{ width: "100%", height: "auto" }}
+            />
+            <figcaption>Now, I look like Andy Warhol.</figcaption>
           </figure>
         </div>
       </section>
 
-      <section id="work" style={{ padding: "20px 0 0" }}>
+      {/* The work. */}
+      <section id="quilts" style={{ padding: "100px 0 0" }}>
+        <div style={{ height: 1, background: "var(--color-text)", marginBottom: 40 }} />
         <div
           style={{
             display: "flex",
@@ -140,147 +108,66 @@ export default function Home() {
         <QuiltGallery />
       </section>
 
-      <section id="design" style={{ padding: "120px 0 0" }}>
-        <h2 className="kicker">On design</h2>
-        <div className="grid-design">
+      {/* Pointers to the rest of the site — the essays and the journal live on their own pages. */}
+      <section style={{ padding: "100px 0 0" }}>
+        <div style={{ height: 1, background: "var(--color-text)", marginBottom: 40 }} />
+        <div className="grid-more">
           <div>
+            <h2 className="kicker">On design</h2>
             <p
               style={{
-                fontSize: 28,
+                fontSize: 24,
                 lineHeight: 1.32,
-                maxWidth: "34ch",
-                margin: "0 0 30px",
+                maxWidth: "30ch",
+                margin: "0 0 20px",
                 textWrap: "pretty",
               }}
             >
               <em>When people see my quilts, the thing they ask is, &ldquo;How do you get those
               ideas?&rdquo;</em>
             </p>
-            <p style={{ fontSize: 16, lineHeight: 1.65, maxWidth: "58ch" }}>
-              Whatever you are working on, be it a dance, a song or a computer program, the design
-              process is much the same. But I&apos;m about quilts, so here&apos;s what works for me.
+            <p className="muted-72" style={{ fontSize: 15, lineHeight: 1.6, maxWidth: "48ch" }}>
+              Where the ideas come from, how they get auditioned on the design wall, and why a small
+              glass of wine helps.
             </p>
-            <p style={{ fontSize: 16, lineHeight: 1.65, maxWidth: "58ch" }}>
-              My interest in quilts is a constant preoccupation. I may brood on an idea for a long
-              time. The list of people, places and things I can steal for a quilt is endless. Then
-              one day these bits begin to join hands, and I go looking in my mind stash for other
-              things I can use — colors, effects. I audition them on my design wall, or lay them out
-              on the bed, and I&apos;m up and running.
-            </p>
-            <p style={{ fontSize: 16, lineHeight: 1.65, maxWidth: "58ch" }}>
-              It helps to have a little time, quiet and space. Hopefully the quilt begins to talk to
-              you. Genius will strike. Or not — in which case you start again, or put it aside until
-              the creative wave sweeps along. I find a small glass of wine helps, and if that
-              doesn&apos;t produce a genius idea, you don&apos;t mind.
-            </p>
-            <p className="muted-65" style={{ fontSize: 15, lineHeight: 1.6, maxWidth: "58ch" }}>
-              Like all design, and all projects really: a series of small decisions.
-            </p>
-          </div>
-          <DesignWall />
-        </div>
-      </section>
-
-      <section id="journal" style={{ padding: "120px 0 0" }}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "baseline",
-            justifyContent: "space-between",
-            gap: 30,
-            flexWrap: "wrap",
-            marginBottom: 30,
-          }}
-        >
-          <h2 className="kicker" style={{ margin: 0 }}>
-            Journal
-          </h2>
-          <a
-            href="https://mahquilts.blogspot.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ fontSize: 13 }}
-          >
-            All posts on the blog →
-          </a>
-        </div>
-        <div className="grid-journal">
-          {journalPosts.map((post) => (
-            <a
-              key={post.link}
-              href={post.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "var(--color-text)" }}
-            >
-              <div className="overline" style={{ color: "var(--color-accent)", marginBottom: 8 }}>
-                {post.date}
-              </div>
-              <div style={{ fontSize: 22, lineHeight: 1.2, marginBottom: 8 }}>{post.title}</div>
-              <p className="muted-72" style={{ fontSize: 14, lineHeight: 1.6, margin: 0 }}>
-                {post.excerpt}
-              </p>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section id="about" style={{ padding: "120px 0 0" }}>
-        <h2 className="kicker">About</h2>
-        <div className="grid-about">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-            <figure style={{ margin: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/quilts/about-dragon.jpg"
-                alt="Mary Anne with her dragon quilt, fifteen years ago"
-                style={{ width: "100%", height: "auto" }}
-              />
-              <figcaption>Fifteen years ago, with the dragon quilt.</figcaption>
-            </figure>
-            <figure style={{ margin: 0 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/quilts/about-now.jpg"
-                alt="Mary Anne today"
-                style={{ width: "100%", height: "auto" }}
-              />
-              <figcaption>Now, I look like Andy Warhol.</figcaption>
-            </figure>
+            <Link href="/on-design" style={{ fontSize: 14 }}>
+              Read how a quilt starts →
+            </Link>
           </div>
           <div>
-            <p
-              style={{
-                fontSize: 28,
-                lineHeight: 1.32,
-                maxWidth: "32ch",
-                margin: "0 0 30px",
-                textWrap: "pretty",
-              }}
-            >
-              My mother taught me to sew when I was about ten.
-            </p>
-            <p style={{ fontSize: 16, lineHeight: 1.65, maxWidth: "58ch" }}>
-              She lost her mother when she was five and was raised by her dad and older brothers on a
-              small farm — depression-era not-quite-poverty. I saw the farmhouse when I was little
-              and found it shockingly plain and small; her three or four dresses had fit on a few
-              nails in the wall.
-            </p>
-            <p style={{ fontSize: 16, lineHeight: 1.65, maxWidth: "58ch" }}>
-              After high school she went to live with a beloved aunt in St. Louis, who was a
-              veritable Martha Stewart and taught her all the household arts, including sewing. I
-              think she became a whole new person in those years. Later, Mom taught me and my sister
-              how to sew clothes and make quilts from the scraps.
-            </p>
-            <p style={{ fontSize: 16, lineHeight: 1.65, maxWidth: "58ch" }}>
-              Since then: fifty years of quilting, a stretch working for Bali Fabrications in the San
-              Francisco Bay Area, a shop in Marietta, Georgia, a quilt guild in St. Petersburg,
-              Florida — and one rescue poodle, Cookie, who is pieced into the car cover.
-            </p>
-            <p className="muted-65" style={{ fontSize: 15, lineHeight: 1.6, maxWidth: "58ch" }}>
-              I love the scrap quilts best of all. I don&apos;t know why the quilts I make often get
-              so big.
-            </p>
+            <h2 className="kicker">Journal</h2>
+            <ul style={{ listStyle: "none", margin: "0 0 20px", padding: 0 }}>
+              {recent.map((post) => (
+                <li
+                  key={post.link}
+                  style={{
+                    padding: "12px 0",
+                    borderTop: "1px solid var(--color-divider)",
+                  }}
+                >
+                  <a
+                    href={post.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      gap: 20,
+                      alignItems: "baseline",
+                      color: "var(--color-text)",
+                    }}
+                  >
+                    <span style={{ fontSize: 18, lineHeight: 1.25 }}>{post.title}</span>
+                    <span className="overline" style={{ color: "var(--color-accent)", whiteSpace: "nowrap" }}>
+                      {post.date}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <Link href="/journal" style={{ fontSize: 14 }}>
+              All journal entries →
+            </Link>
           </div>
         </div>
       </section>
@@ -316,33 +203,6 @@ export default function Home() {
           <ContactForm />
         </div>
       </section>
-
-      <footer style={{ padding: "120px 0 0" }}>
-        <div style={{ height: 1, background: "var(--color-text)" }} />
-        <div
-          className="overline muted-60"
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            gap: 20,
-            padding: "8px 0",
-            flexWrap: "wrap",
-          }}
-        >
-          <span>Mary Anne Quilts</span>
-          <span>
-            Site by{" "}
-            <a href="https://hellosavvy.design" target="_blank" rel="noopener noreferrer">
-              Hello Savvy
-            </a>{" "}
-            · more sites at{" "}
-            <a href="https://savvy.website" target="_blank" rel="noopener noreferrer">
-              savvy.website
-            </a>
-          </span>
-        </div>
-        <div style={{ height: 4, background: "var(--color-text)" }} />
-      </footer>
-    </div>
+    </>
   );
 }

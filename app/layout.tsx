@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Source_Serif_4 } from "next/font/google";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
 const sourceSerif = Source_Serif_4({
@@ -11,7 +13,10 @@ const sourceSerif = Source_Serif_4({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.quilters.studio"),
-  title: "Mary Anne Quilts",
+  title: {
+    default: "Mary Anne Quilts",
+    template: "%s — Mary Anne Quilts",
+  },
   description:
     "Mary Anne Henderson — quilter, Marietta, Georgia. Fifty years of scraps: the quilts, the design process, and the journal.",
   openGraph: {
@@ -30,7 +35,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={sourceSerif.variable}>
-      <body>{children}</body>
+      <body>
+        <div className="shell">
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }

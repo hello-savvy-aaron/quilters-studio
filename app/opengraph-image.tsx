@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-export const alt = "Mary Anne Henderson — Studio. Scrap quilts, glass towers, and notes on design.";
+export const alt = "Mary Anne Henderson — Studio. Fifty years of scrap quilts, and the stories behind them.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -72,7 +72,7 @@ export default async function OgImage() {
               marginBottom: 36,
             }}
           >
-            Quilts, glass towers, and notes on design, from Marietta, Georgia.
+            Fifty years of scrap quilts, and the stories behind them.
           </div>
           <div
             style={{

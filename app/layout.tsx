@@ -24,10 +24,10 @@ export const metadata: Metadata = {
     template: "%s — Mary Anne Henderson",
   },
   description:
-    "Mary Anne Henderson, quilter and glass artist in Marietta, Georgia. Scrap quilts, glass towers, and notes on design.",
+    "Mary Anne Henderson — quilter, Marietta, Georgia. Fifty years of scraps: the quilts, the design process, and the journal.",
   openGraph: {
     title: "Mary Anne Henderson — Studio",
-    description: "Scrap quilts, glass towers, and notes on design, from Marietta, Georgia.",
+    description: "Fifty years of scrap quilts, and the stories behind them.",
     url: "https://www.quilters.studio",
     siteName: "Mary Anne Henderson Studio",
     type: "website",

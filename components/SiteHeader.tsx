@@ -16,6 +16,7 @@ export default function SiteHeader() {
         ))}
         <Link href="/on-design">On design</Link>
         <Link href="/journal">Journal</Link>
+        <Link href="/family-stories">Family stories</Link>
         <Link href="/#about">About</Link>
         <Link href="/#contact" className="nav-cta">
           Contact

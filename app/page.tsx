@@ -2,44 +2,55 @@ import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
 import CoverPlaceholder from "@/components/CoverPlaceholder";
 import { collections, pieceCount } from "@/lib/collections";
+import { familyStories } from "@/lib/family-stories";
 import { journalPosts } from "@/lib/quilts";
 
 export default function Home() {
   const recent = journalPosts.slice(0, 3);
+  const stories = familyStories.slice(0, 3);
 
   return (
     <>
-      {/* The artist. */}
+      {/* About — the biography opens the site. */}
       <section id="about" className="grid-bio">
         <div>
-          <p className="kicker">Quilts · Glass · Marietta, Georgia</p>
-          <h1 className="display-xl" style={{ maxWidth: "16ch", marginBottom: 32 }}>
-            Scrap quilts of three thousand pieces. A new series in glass.
+          <p className="kicker">Hello, I&apos;m Mary Anne Henderson</p>
+          <h1 className="display-xl" style={{ maxWidth: "17ch", marginBottom: 32 }}>
+            My mother taught me to sew when I was about ten.
           </h1>
           <p className="lead" style={{ marginBottom: 28 }}>
-            Mary Anne Henderson is a quilter and glass artist working in Marietta, Georgia. Over
-            fifty years she has built a body of work from scraps: quilts featured in Patchwork
-            Quilts magazine and in Georgia Bonesteel&apos;s <em>Quiltmaking Legacy</em>, and, more
-            recently, a series of towers in glass.
+            I&apos;ve been quilting for over fifty years, and my family urged me to share some of my
+            favorites. So here they are.
           </p>
           <div className="prose">
             <p>
-              She learned to sew at ten from her mother, who had learned the household arts from an
-              aunt in St. Louis and passed them on. Since then: a stretch with Bali Fabrications, a
-              batik importer in the San Francisco Bay Area; a quilt shop in Marietta; and a guild in
-              St. Petersburg, Florida, whose members pieced the quilted car cover known as Quilty
-              McQuiltface.
+              She lost her mother when she was five and was raised by her dad and older brothers on a
+              small farm — depression-era not-quite-poverty. I saw the farmhouse when I was little and
+              found it shockingly plain and small; her three or four dresses had fit on a few nails in
+              the wall.
+            </p>
+            <p>
+              After high school she went to live with a beloved aunt in St. Louis, who was a veritable
+              Martha Stewart and taught her all the household arts, including sewing. I think she
+              became a whole new person in those years. Later, Mom taught me and my sister how to sew
+              clothes and make quilts from the scraps.
+            </p>
+            <p>
+              Since then: fifty years of quilting, a stretch working for Bali Fabrications in the San
+              Francisco Bay Area, a shop in Marietta, Georgia, a quilt guild in St. Petersburg,
+              Florida — and one rescue poodle, Cookie, who is pieced into the car cover.
             </p>
             <p className="muted">
-              Scrap quilts remain the heart of the work. They tend to get big.
+              I love the scrap quilts best of all. I don&apos;t know why the quilts I make often get so
+              big.
             </p>
           </div>
           <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 36, flexWrap: "wrap" }}>
-            <a className="btn btn-primary" href="#collections">
-              View the collections
-            </a>
+            <Link className="btn btn-primary" href="/quilts">
+              See the quilts
+            </Link>
             <Link className="btn btn-secondary" href="/on-design">
-              On design
+              How a quilt starts
             </Link>
           </div>
         </div>
@@ -47,13 +58,13 @@ export default function Home() {
         <div className="grid-portraits">
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/quilts/about-dragon.jpg" alt="Mary Anne Henderson with her dragon quilt" />
-            <figcaption>With the dragon quilt.</figcaption>
+            <img src="/quilts/about-dragon.jpg" alt="Mary Anne with her dragon quilt, fifteen years ago" />
+            <figcaption>Fifteen years ago, with the dragon quilt.</figcaption>
           </figure>
           <figure>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/quilts/about-now.jpg" alt="Mary Anne Henderson" />
-            <figcaption>Mary Anne Henderson.</figcaption>
+            <img src="/quilts/about-now.jpg" alt="Mary Anne today" />
+            <figcaption>Now, I look like Andy Warhol.</figcaption>
           </figure>
         </div>
       </section>
@@ -121,6 +132,27 @@ export default function Home() {
             </ul>
             <Link href="/journal" style={{ fontSize: 14 }}>
               All entries →
+            </Link>
+          </div>
+          <div>
+            <h2 className="kicker">Family stories</h2>
+            <ul className="list-plain" style={{ marginBottom: 20 }}>
+              {stories.map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/family-stories/${s.slug}`}>
+                    <span style={{ fontFamily: "var(--font-display)", fontSize: 20 }}>{s.title}</span>
+                    <span className="eyebrow muted" style={{ whiteSpace: "nowrap" }}>
+                      {s.date}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="muted" style={{ fontSize: 14, maxWidth: "40ch" }}>
+              The family history, written down as I remember it.
+            </p>
+            <Link href="/family-stories" style={{ fontSize: 14 }}>
+              All stories →
             </Link>
           </div>
         </div>

@@ -2,19 +2,28 @@ import type { Piece } from "./collections";
 
 export const quilts: Piece[] = [
   {
-    // Photo: save the photograph as public/quilts/mikes-shirt-quilt-1.jpg.
+    // Photos: save as public/quilts/mikes-shirt-quilt-1.jpg (whole quilt, the cover)
+    // and mikes-shirt-quilt-2/3/4.jpg (the three details shown in the carousel).
     title: "Mike’s Shirt Quilt",
     meta: "Thrifted shirt fronts and faux ties · woodsy sashing · longarm quilted",
     gridNote: "Ten or twelve shirt fronts, buttons and collars intact · ties pieced in",
     gridTag: "For Mike",
     cover: {
       src: "/quilts/mikes-shirt-quilt-1.jpg",
-      alt: "Mike’s Shirt Quilt, made from plaid shirt fronts with their plackets, collars and pockets, ties pieced down the fronts",
+      alt: "Mike’s Shirt Quilt spread out: shirt fronts set in a grid of red plaid sashing, a button at every crossing",
     },
     images: [
       {
-        src: "/quilts/mikes-shirt-quilt-1.jpg",
-        alt: "The whole quilt: shirt fronts set in a grid of plaid sashing, a button at every crossing",
+        src: "/quilts/mikes-shirt-quilt-2.jpg",
+        alt: "The peace-sign tie, down a plaid placket with the collar closed in a bit",
+      },
+      {
+        src: "/quilts/mikes-shirt-quilt-3.jpg",
+        alt: "Two of the ties: a galaxy, and a Halloween party",
+      },
+      {
+        src: "/quilts/mikes-shirt-quilt-4.jpg",
+        alt: "The guitar tie, laid over a shirt pocket",
       },
     ],
     body: [

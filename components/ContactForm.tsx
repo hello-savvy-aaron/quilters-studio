@@ -23,14 +23,11 @@ export default function ContactForm() {
       </div>
       <div className="field">
         <label htmlFor="cnote">What&apos;s on your mind?</label>
-        <input className="input" id="cnote" type="text" placeholder="A quilt, a question, a hello" />
+        <input className="input" id="cnote" type="text" placeholder="A commission, a question, a design" />
       </div>
       <button className="btn btn-primary btn-block" type="submit">
         {sent ? "Sent — thank you!" : "Send"}
       </button>
-      <p className="muted-55" style={{ fontSize: 12, margin: 0 }}>
-        Happy quilting.
-      </p>
     </form>
   );
 }

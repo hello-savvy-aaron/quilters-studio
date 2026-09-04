@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Source_Serif_4 } from "next/font/google";
+import { Inter, Source_Serif_4 } from "next/font/google";
+import SiteFooter from "@/components/SiteFooter";
+import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
 const sourceSerif = Source_Serif_4({
@@ -9,16 +11,25 @@ const sourceSerif = Source_Serif_4({
   variable: "--font-source-serif",
 });
 
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-inter",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.quilters.studio"),
-  title: "Mary Anne Quilts",
+  title: {
+    default: "Mary Anne Henderson — Studio",
+    template: "%s — Mary Anne Henderson",
+  },
   description:
-    "Mary Anne Henderson — quilter, Marietta, Georgia. Fifty years of scraps: the quilts, the design process, and the journal.",
+    "Mary Anne Henderson, quilter and glass artist in Marietta, Georgia. Scrap quilts, glass towers, and notes on design.",
   openGraph: {
-    title: "Mary Anne Quilts",
-    description: "They stick to me like lint. Fifty years of scrap quilts, and the stories behind them.",
+    title: "Mary Anne Henderson — Studio",
+    description: "Scrap quilts, glass towers, and notes on design, from Marietta, Georgia.",
     url: "https://www.quilters.studio",
-    siteName: "Mary Anne Quilts",
+    siteName: "Mary Anne Henderson Studio",
     type: "website",
   },
 };
@@ -29,8 +40,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={sourceSerif.variable}>
-      <body>{children}</body>
+    <html lang="en" className={`${sourceSerif.variable} ${inter.variable}`}>
+      <body>
+        <div className="shell">
+          <SiteHeader />
+          <main>{children}</main>
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }

@@ -1,18 +1,34 @@
+import type { Piece } from "./collections";
 
-export type QuiltImage = { src: string; alt: string; cap?: number };
-
-export type Quilt = {
-  title: string;
-  meta: string;
-  link: string;
-  gridNote: string;
-  gridTag: string;
-  cover: QuiltImage;
-  images: QuiltImage[];
-  body: string[];
-};
-
-export const quilts: Quilt[] = [
+export const quilts: Piece[] = [
+  {
+    // Photo: save the photograph as public/quilts/mikes-shirt-quilt-1.jpg.
+    title: "Mike’s Shirt Quilt",
+    meta: "Thrifted shirt fronts and faux ties · woodsy sashing · longarm quilted",
+    gridNote: "Ten or twelve shirt fronts, buttons and collars intact · ties pieced in",
+    gridTag: "For Mike",
+    cover: {
+      src: "/quilts/mikes-shirt-quilt-1.jpg",
+      alt: "Mike’s Shirt Quilt, made from plaid shirt fronts with their plackets, collars and pockets, ties pieced down the fronts",
+    },
+    images: [
+      {
+        src: "/quilts/mikes-shirt-quilt-1.jpg",
+        alt: "The whole quilt: shirt fronts set in a grid of plaid sashing, a button at every crossing",
+      },
+    ],
+    body: [
+      "When I started this blog, I had a plan. Simple quilts first, then work my way up to the complicated ones, nice and logical. That lasted about one post before I bored myself. So here’s one of my favorites instead, out of order and unrepentant.",
+      "I have a wonderful brother-in-law, Mike. He’s been my brother-in-law for something like fifty-five years, and in all that time I don’t think I’ve seen him out of a plaid shirt. He’s got that New England thing going — solid, a little wry, entirely himself. One day I just had an inkling to use shirt material, and once the idea landed I couldn’t shake it.",
+      "Shirt fabric is so underused. If you’ve ever gone through the men’s rack at a thrift store, you know what I mean — beautiful, expensive shirts, yards and yards of Egyptian cotton, going for nothing. I used to work at Nordstrom, so I know exactly what those shirts cost new, and it genuinely makes me want to cry a little. So I’d been collecting them for a while. Not all flannel, either — there’s more range in a shirt drawer than people think.",
+      "There are patterns out there for faux shirt blocks, the kind that just look like a shirt front. I’ve made them, and they’re terrific. But I wanted this one to be more unusual — a real one-of-a-kind for Mike. So I cut the fronts off ten or twelve shirts, right at the shoulder seam and straight across the back, and fused each one to a very thin backing, almost nothing at all. Then I pressed the shirt within an inch of its life — buttons, collar, all of it. Usually I closed the collar in a bit, but if a shirt had a good label, the label stayed.",
+      "I knew right away that shirt fronts alone needed some variety, so I added ties. I used to work for Mulberry Neckwear, and I’ve always had a soft spot for a good tie, so I constructed a few faux ties to go along with the shirts. I tried to tie each one — no pun intended — to something Mike likes. One has a peace sign on it. A few nod to music he loves. There are suspenders in there too.",
+      "Once I had however many blocks it ended up being, I set it all together with a woodsy-feeling fabric and quilted the dickens out of it, especially in the busy, detailed spots. I’m lucky enough to have a longarm, and this quilt was made for it.",
+      "I knew Mike would like it. My sister Patty — his wife — sent me a picture almost right away, the quilt spread out on their bed in their lovely Cape Cod house. It just fit, like it had always been there. I think this might be one of the most successful things I’ve ever made, and it happened almost off the cuff.",
+      "This is really the quilt that got me started on plaids and thrifted fabric in a serious way. None of us want good fabric heading into a dump, and unfortunately that’s exactly where most clothing-based fabric goes. The same idea works with baby clothes, with old t-shirts, with almost anything hanging unused in a closet — but there’s something about shirts and plaid, specifically, that I don’t think I’ll ever get tired of.",
+      "Have fun making it.",
+    ],
+  },
   {
     title: "Quilty McQuiltface",
     meta: "Guild project · St. Petersburg, Florida and Marietta, Georgia",

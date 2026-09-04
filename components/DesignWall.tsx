@@ -73,7 +73,7 @@ export default function DesignWall() {
         {cells}
       </div>
       <figcaption
-        className="overline"
+        className="eyebrow"
         style={{ display: "flex", justifyContent: "space-between", gap: 20, marginTop: 10 }}
       >
         <span>On the design wall — {PATTERN_NAMES[phase]}</span>

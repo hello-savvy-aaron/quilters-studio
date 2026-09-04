@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 
-export const alt = "Mary Anne Quilts — they stick to me like lint.";
+export const alt = "Mary Anne Henderson — Studio. Scrap quilts, glass towers, and notes on design.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -47,7 +47,7 @@ export default async function OgImage() {
               color: "rgba(32, 30, 29, 0.6)",
             }}
           >
-            <span>MARY ANNE HENDERSON · QUILTER</span>
+            <span>MARY ANNE HENDERSON · STUDIO</span>
             <span>MARIETTA, GA</span>
           </div>
           <div style={{ display: "flex", height: 2, background: "#201e1d" }} />
@@ -61,7 +61,7 @@ export default async function OgImage() {
               margin: "36px 0 24px",
             }}
           >
-            They stick to me like lint.
+            Scrap quilts of three thousand pieces.
           </div>
           <div
             style={{
@@ -72,7 +72,7 @@ export default async function OgImage() {
               marginBottom: 36,
             }}
           >
-            Fifty years of scrap quilts, and the stories behind them.
+            Quilts, glass towers, and notes on design, from Marietta, Georgia.
           </div>
           <div
             style={{

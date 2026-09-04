@@ -4,62 +4,48 @@ import { journalPosts } from "@/lib/quilts";
 export const metadata: Metadata = {
   title: "Journal",
   description:
-    "Mary Anne Henderson's quilting journal — the stories behind the quilts, from the blog at mahquilts.blogspot.com.",
+    "Mary Anne Henderson's studio journal — the stories behind the work, from the blog at mahquilts.blogspot.com.",
 };
 
 export default function Journal() {
   return (
-    <section>
-      <div className="page-head">
-        <div>
-          <h2 className="kicker">Journal</h2>
-          <h1
-            style={{
-              fontSize: "clamp(40px, 5vw, 78px)",
-              lineHeight: 1.02,
-              letterSpacing: "-0.03em",
-              margin: "0 0 20px",
-              maxWidth: "16ch",
-              textWrap: "pretty",
-            }}
+    <>
+      <section className="page-head">
+        <p className="kicker">Journal</p>
+        <div className="section-head" style={{ alignItems: "flex-end" }}>
+          <div>
+            <h1 className="display-xl" style={{ maxWidth: "14ch", marginBottom: 20 }}>
+              Notes from the studio.
+            </h1>
+            <p className="muted" style={{ fontSize: 16, maxWidth: "50ch", margin: 0 }}>
+              The stories behind the work. Each entry opens on the journal, where the full post and
+              all the pictures live.
+            </p>
+          </div>
+          <a
+            href="https://mahquilts.blogspot.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ fontSize: 13, whiteSpace: "nowrap" }}
           >
-            The stories behind the quilts.
-          </h1>
-          <p className="muted-72" style={{ fontSize: 16, lineHeight: 1.6, maxWidth: "52ch", margin: 0 }}>
-            Each entry opens on the blog, where the full post and all the pictures live.
-          </p>
+            All entries →
+          </a>
         </div>
-        <a
-          href="https://mahquilts.blogspot.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ fontSize: 13, whiteSpace: "nowrap" }}
-        >
-          All posts on the blog →
-        </a>
-      </div>
+      </section>
 
-      <div style={{ height: 1, background: "var(--color-text)", margin: "40px 0" }} />
+      <div style={{ height: 24 }} />
 
       <div className="grid-journal">
         {journalPosts.map((post) => (
-          <a
-            key={post.link}
-            href={post.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "var(--color-text)" }}
-          >
-            <div className="overline" style={{ color: "var(--color-accent)", marginBottom: 8 }}>
-              {post.date}
-            </div>
-            <div style={{ fontSize: 22, lineHeight: 1.2, marginBottom: 8 }}>{post.title}</div>
-            <p className="muted-72" style={{ fontSize: 14, lineHeight: 1.6, margin: 0 }}>
+          <a key={post.link} href={post.link} target="_blank" rel="noopener noreferrer" className="journal-entry">
+            <span className="eyebrow muted">{post.date}</span>
+            <div className="entry-title">{post.title}</div>
+            <p className="muted" style={{ fontSize: 14, margin: 0 }}>
               {post.excerpt}
             </p>
           </a>
         ))}
       </div>
-    </section>
+    </>
   );
 }

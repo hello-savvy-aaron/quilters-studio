@@ -1,18 +1,27 @@
+import type { Piece } from "./collections";
 
-export type QuiltImage = { src: string; alt: string; cap?: number };
-
-export type Quilt = {
-  title: string;
-  meta: string;
-  link: string;
-  gridNote: string;
-  gridTag: string;
-  cover: QuiltImage;
-  images: QuiltImage[];
-  body: string[];
-};
-
-export const quilts: Quilt[] = [
+export const quilts: Piece[] = [
+  {
+    // Photo: save the shirt-quilt photograph as public/quilts/shirt-quilt-1.jpg (not yet in the repo).
+    title: "Shirt Quilt",
+    meta: "Flannel shirts, ties and buttons · pieced from the shirts themselves",
+    gridNote: "Plaid flannel shirts, plackets and collars intact · ties pieced in",
+    gridTag: "Flannel",
+    cover: {
+      src: "/quilts/shirt-quilt-1.jpg",
+      alt: "Shirt Quilt, made from plaid flannel shirts with the plackets, collars and pockets kept whole",
+    },
+    images: [
+      {
+        src: "/quilts/shirt-quilt-1.jpg",
+        alt: "The whole quilt: sixteen shirt fronts in a grid of red plaid sashing, buttoned at the corners",
+      },
+    ],
+    body: [
+      "A quilt built from the shirts themselves. Each block is a shirt front, plaid flannel, with the placket, buttons, collar and pocket left exactly where they were. Down a few of the plackets runs a necktie: sports balls, guitars, a starry sky, a bandleader.",
+      "The sashing is red plaid, and where the strips cross there is a real button at every corner. The result is a family album you can sleep under.",
+    ],
+  },
   {
     title: "Quilty McQuiltface",
     meta: "Guild project · St. Petersburg, Florida and Marietta, Georgia",

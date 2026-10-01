@@ -10,8 +10,11 @@ export type FamilyStory = {
   date: string;
   /** One or two sentences for the index. */
   summary: string;
-  /** Paragraphs, in order. A `{ heading }` entry starts a new section. */
-  body: (string | { heading: string })[];
+  /**
+   * Paragraphs, in order. A `{ heading }` entry starts a new section; an `{ image }` entry
+   * shows a photo (from `public/family-stories/`) with an optional caption.
+   */
+  body: (string | { heading: string } | { image: string; alt: string; caption?: string })[];
 };
 
 export const familyStories: FamilyStory[] = [
@@ -31,7 +34,22 @@ export const familyStories: FamilyStory[] = [
 
       { heading: "The first pictorial quilt" },
       "I love this simple quilt. This is the first one where I really tried to make pictures out of simple shapes. I had made a number of repetitive block quilts, had just finished a Christmas one, and was bored. I had a young child at the time, and he and I decided to make a quilt with a little picture for him. I made it and we both liked it. It was the beginning of many more quilts that weren’t built on elaborate, repetitive patterns. This quilt is at least 45 years old.",
+      {
+        image: "/family-stories/sunrise-mountains.jpg",
+        alt: "A quilt of twenty blocks, each a triangle mountain under a rising sun — appliquéd yellow suns on blue alternating with embroidered blocks of flowers, a tree, a rainbow and clouds — in navy floral sashing with yellow cornerstones",
+        caption: "The first pictorial quilt: mountains and suns, at least 45 years old.",
+      },
       "I feel like it freed me from working within a grid. I had started with three-and-a-half-inch squares, over and over. Soon they became squares of any size with a frame around them. Then any strip that would contribute to a blob of color. That’s the kind of quilt I like best now — in fact, I’m working on one.",
+      {
+        image: "/family-stories/nursery-nine-patch.jpg",
+        alt: "A nine-patch quilt that moves from a starry navy sky at the top to bright gingham and calico below, with nursery-rhyme pictures set in among the squares: a cow jumping over the moon, a hot-air balloon, a cat with a fiddle",
+        caption: "Squares of any size, with pictures framed among them.",
+      },
+      {
+        image: "/family-stories/spongebob.jpg",
+        alt: "An appliquéd quilt of SpongeBob blowing bubbles beside Patrick and Gary the snail on a mottled blue sea, framed by a border of bright polka-dot squares",
+        caption: "Many years down the line: SpongeBob, Patrick and Gary.",
+      },
 
       { heading: "In praise of unknown artisans" },
       "Somebody in my family was always making something. My mother sewed quilts, sewed clothing for all of us, little crinoline dresses for Easter. My father — I would like to say he was creative in some way, but mostly he worked on the car. Keeping the old cars they had running was a part-time job in itself. He would pull the car into the garage, get his tools out, and we’d hear all this clunking. The next thing we’d hear was my younger brother, Billy, imitating his dad right down to the last syllable: “Oh, shit! Oh, shit! Oh, damn, damn.” At first it got a laugh, but then somebody had to explain that this was not the ideal language.",

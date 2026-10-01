@@ -379,6 +379,8 @@ figcaption { font-size: 12px; margin-top: 8px; color: var(--color-muted); }
 .story-body p:first-child { font-family: var(--font-display); font-size: 24px; line-height: 1.4; }
 .story-body h2 { font-size: clamp(22px, 2vw, 28px); line-height: 1.15; margin: 48px 0 16px; }
 .story-body h2:first-child { margin-top: 0; }
+.story-body figure { margin: 32px 0; }
+.story-body figure img { width: 100%; height: auto; }
 .story-nav { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; font-size: 14px; }
 @media (max-width: 640px) {
   .story-row { grid-template-columns: minmax(0, 1fr); gap: 6px; }

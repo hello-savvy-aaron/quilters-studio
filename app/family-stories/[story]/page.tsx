@@ -39,7 +39,17 @@ export default async function FamilyStoryPage({ params }: { params: Promise<Para
         </h1>
         <div className="prose story-body">
           {story.body.map((t, i) =>
-            typeof t === "string" ? <p key={i}>{t}</p> : <h2 key={i}>{t.heading}</h2>,
+            typeof t === "string" ? (
+              <p key={i}>{t}</p>
+            ) : "heading" in t ? (
+              <h2 key={i}>{t.heading}</h2>
+            ) : (
+              <figure key={i}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={t.image} alt={t.alt} loading="lazy" />
+                {t.caption && <figcaption>{t.caption}</figcaption>}
+              </figure>
+            ),
           )}
         </div>
       </section>

@@ -3,10 +3,10 @@ import ContactForm from "@/components/ContactForm";
 import CoverPlaceholder from "@/components/CoverPlaceholder";
 import { collections, pieceCount } from "@/lib/collections";
 import { familyStories } from "@/lib/family-stories";
-import { journalPosts } from "@/lib/quilts";
+import { getJournalEntries } from "@/lib/journal";
 
-export default function Home() {
-  const recent = journalPosts.slice(0, 3);
+export default async function Home() {
+  const recent = (await getJournalEntries()).slice(0, 3);
   const stories = familyStories.slice(0, 3);
 
   return (
@@ -120,8 +120,8 @@ export default function Home() {
             <h2 className="kicker">Journal</h2>
             <ul className="list-plain" style={{ marginBottom: 20 }}>
               {recent.map((post) => (
-                <li key={post.link}>
-                  <a href={post.link} target="_blank" rel="noopener noreferrer">
+                <li key={post.href}>
+                  <a href={post.href} {...(post.external && { target: "_blank", rel: "noopener noreferrer" })}>
                     <span style={{ fontFamily: "var(--font-display)", fontSize: 20 }}>{post.title}</span>
                     <span className="eyebrow muted" style={{ whiteSpace: "nowrap" }}>
                       {post.date}

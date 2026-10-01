@@ -208,6 +208,38 @@ figcaption { font-size: 12px; margin-top: 8px; color: var(--color-muted); }
 .input:hover { border-color: color-mix(in srgb, var(--color-text) 55%, transparent); }
 .input:focus-visible { border-color: var(--color-text); outline: none; }
 
+/* — admin: the journal entry form — */
+.admin-form { display: grid; gap: 28px; max-width: 720px; }
+.admin-form .field > label { font-size: 14px; }
+.admin-form .input { font-size: 17px; }
+.admin-form textarea.input { line-height: 1.6; resize: vertical; }
+.admin-drop {
+  padding: 48px 24px;
+  text-align: center;
+  font-size: 16px;
+  color: var(--color-muted);
+  border: 2px dashed color-mix(in srgb, var(--color-text) 25%, transparent);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.admin-drop:hover, .admin-drop.is-dragging {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-accent) 6%, transparent);
+}
+.admin-photos {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 16px;
+}
+.admin-photos img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: var(--radius); }
+.admin-photos li { display: grid; gap: 4px; justify-items: start; }
+.admin-error { color: var(--color-accent-2); font-size: 15px; margin: 0; }
+.btn:disabled { opacity: 0.5; cursor: default; }
+
 /* — sections & grids — */
 .section { padding-top: var(--section-gap); }
 .section-head {

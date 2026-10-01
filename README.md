@@ -15,7 +15,12 @@ gallery-style captions. Tokens live at the top of `app/globals.css`.
 - `/quilts`, `/glass-towers` — one page per collection, generated from `lib/collections.ts`.
   Each work opens in an overlay with more views and its story.
 - `/on-design` — the design essay ("They stick to me like lint") with the animated design wall.
-- `/journal` — the index of blog posts; every entry opens on mahquilts.blogspot.com.
+- `/journal` — new entries written on the site (`/journal/<slug>`) followed by the older
+  posts on mahquilts.blogspot.com (listed in `lib/quilts.ts`).
+- `/admin` — where Mary Anne writes new journal entries. Visit `/admin?admin=true` once in a
+  browser to remember it (it sets an `admin` cookie; this is deliberately not real auth).
+  Posts and photos are stored in Vercel Blob, so the project needs a Blob store connected
+  (Vercel dashboard → Storage), which provides `BLOB_READ_WRITE_TOKEN`.
 - `/family-stories` and `/family-stories/<slug>` — Mary Anne's family history, written on the site
   itself. Stories live in `lib/family-stories.ts`; add an object and it gets a page.
 

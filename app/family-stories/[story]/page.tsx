@@ -38,9 +38,9 @@ export default async function FamilyStoryPage({ params }: { params: Promise<Para
           {story.title}
         </h1>
         <div className="prose story-body">
-          {story.body.map((t) => (
-            <p key={t.slice(0, 40)}>{t}</p>
-          ))}
+          {story.body.map((t, i) =>
+            typeof t === "string" ? <p key={i}>{t}</p> : <h2 key={i}>{t.heading}</h2>,
+          )}
         </div>
       </section>
 

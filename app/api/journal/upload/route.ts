@@ -1,19 +1,21 @@
-import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
+import { issueSignedToken } from "@vercel/blob";
+import { handleUploadPresigned, type HandleUploadPresignedBody } from "@vercel/blob/client";
 import { isAdmin } from "@/lib/admin";
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as HandleUploadBody;
+  const body = (await request.json()) as HandleUploadPresignedBody;
   try {
-    const result = await handleUpload({
+    const result = await handleUploadPresigned({
       body,
       request,
-      onBeforeGenerateToken: async () => {
+      getSignedToken: async (pathname) => {
         if (!(await isAdmin())) throw new Error("Not allowed");
-        return {
+        const limits = {
           allowedContentTypes: ["image/jpeg", "image/png", "image/webp", "image/gif"],
           maximumSizeInBytes: 40 * 1024 * 1024,
-          addRandomSuffix: true,
         };
+        const token = await issueSignedToken({ pathname, operations: ["put"], ...limits });
+        return { token, urlOptions: { ...limits, addRandomSuffix: true } };
       },
     });
     return Response.json(result);

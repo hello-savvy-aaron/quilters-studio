@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { isAdmin } from "@/lib/admin";
+import { blobConfigured } from "@/lib/blob-config";
 import PostForm from "./PostForm";
 
 export const metadata: Metadata = {
@@ -28,7 +29,7 @@ export default async function AdminPage({
       <h1 className="display-lg" style={{ marginBottom: 36 }}>
         Write a new entry
       </h1>
-      <PostForm rememberBrowser={viaLink} storageReady={Boolean(process.env.BLOB_READ_WRITE_TOKEN)} />
+      <PostForm rememberBrowser={viaLink} storageReady={blobConfigured()} />
     </section>
   );
 }

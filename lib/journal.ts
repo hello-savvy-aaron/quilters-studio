@@ -1,4 +1,5 @@
 import { list, put } from "@vercel/blob";
+import { blobConfigured } from "./blob-config";
 import { unstable_cache } from "next/cache";
 import { journalPosts } from "./quilts";
 
@@ -38,7 +39,7 @@ function excerptOf(post: StudioPost) {
 }
 
 async function fetchStudioPosts(): Promise<StudioPost[]> {
-  if (!process.env.BLOB_READ_WRITE_TOKEN) return [];
+  if (!blobConfigured()) return [];
   const { blobs } = await list({ prefix: POSTS_PREFIX });
   const posts = await Promise.all(
     blobs.map(async (b) => (await fetch(b.url, { cache: "no-store" })).json() as Promise<StudioPost>),

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { upload } from "@vercel/blob/client";
+import { uploadPresigned } from "@vercel/blob/client";
 import { publishPost } from "./actions";
 
 type Photo = {
@@ -51,7 +51,7 @@ export default function PostForm({
       const id = crypto.randomUUID();
       setPhotos((prev) => [...prev, { id, preview: URL.createObjectURL(file) }]);
       const name = file.name.toLowerCase().replace(/[^a-z0-9.]+/g, "-");
-      upload(`journal/photos/${name}`, file, {
+      uploadPresigned(`journal/photos/${name}`, file, {
         access: "public",
         handleUploadUrl: "/api/journal/upload",
       })
@@ -113,7 +113,7 @@ export default function PostForm({
     <form className="admin-form" onSubmit={onSubmit}>
       {!storageReady && (
         <p className="admin-error">
-          Photo and post storage isn&apos;t connected yet (BLOB_READ_WRITE_TOKEN is missing), so
+          Photo and post storage isn&apos;t connected yet (connect the Blob store in Vercel), so
           publishing won&apos;t work here.
         </p>
       )}

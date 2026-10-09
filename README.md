@@ -20,7 +20,7 @@ gallery-style captions. Tokens live at the top of `app/globals.css`.
 - `/admin` — where Mary Anne writes new journal entries. Visit `/admin?admin=true` once in a
   browser to remember it (it sets an `admin` cookie; this is deliberately not real auth).
   Posts and photos are stored in Vercel Blob, so the project needs a Blob store connected
-  (Vercel dashboard → Storage), which provides `BLOB_READ_WRITE_TOKEN`.
+  (Vercel dashboard → Storage), which provides `BLOB_STORE_ID` (or `BLOB_READ_WRITE_TOKEN`).
 - `/family-stories` and `/family-stories/<slug>` — Mary Anne's family history, written on the site
   itself. Stories live in `lib/family-stories.ts`; add an object and it gets a page.
 

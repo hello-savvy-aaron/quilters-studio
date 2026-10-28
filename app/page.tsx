@@ -11,6 +11,13 @@ export default async function Home() {
 
   return (
     <>
+      {/* Seasonal greeting. */}
+      <div className="holiday-banner" role="note">
+        <span aria-hidden="true">🎃</span>
+        <p>Happy Halloween, everyone.</p>
+        <span aria-hidden="true">🎃</span>
+      </div>
+
       {/* About — the biography opens the site. */}
       <section id="about" className="grid-bio">
         <div>

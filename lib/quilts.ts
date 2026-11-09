@@ -4,10 +4,9 @@ export const quilts: Piece[] = [
   {
     // Photos: save as public/quilts/mikes-shirt-quilt-1.jpg (whole quilt, the cover)
     // and mikes-shirt-quilt-2/3/4.jpg (the three details shown in the carousel).
+    slug: "mikes-shirt-quilt",
     title: "Mike’s Shirt Quilt",
     meta: "Thrifted shirt fronts and faux ties · woodsy sashing · longarm quilted",
-    gridNote: "Ten or twelve shirt fronts, buttons and collars intact · ties pieced in",
-    gridTag: "For Mike",
     cover: {
       src: "/quilts/mikes-shirt-quilt-1.jpg",
       alt: "Mike’s Shirt Quilt spread out: shirt fronts set in a grid of red plaid sashing, a button at every crossing",
@@ -39,11 +38,10 @@ export const quilts: Piece[] = [
     ],
   },
   {
+    slug: "quilty-mcquiltface",
     title: "Quilty McQuiltface",
-    meta: "Guild project · St. Petersburg, Florida and Marietta, Georgia",
+    meta: "Guild project · St. Petersburg, Florida",
     link: "https://mahquilts.blogspot.com/2026/03/quilty-mcquilftace.html",
-    gridNote: "A quilted car cover · guild project, St. Petersburg & Marietta",
-    gridTag: "Two versions",
     cover: {
       src: "/quilts/quilty-1.jpg",
       alt: "Quilty McQuiltface, a quilted car cover",
@@ -56,17 +54,14 @@ export const quilts: Piece[] = [
       {
         src: "/quilts/quilty-2.jpg",
         alt: "Version 2 — enlarged for a van, with portraits on the black fabric windows",
-        cap: 349,
       },
       {
         src: "/quilts/quilty-3.jpg",
         alt: "Quilty out on display",
-        cap: 419,
       },
       {
         src: "/quilts/quilty-4.jpg",
         alt: "The makers, pieced in",
-        cap: 416,
       },
     ],
     body: [
@@ -77,11 +72,12 @@ export const quilts: Piece[] = [
     ],
   },
   {
+    slug: "sock-hop",
     title: "Sock Hop",
-    meta: "1994 · 92 × 82 in · 3,500 pieces",
+    dimensions: "92 × 82 in",
+    year: "1994",
+    meta: "3,500 pieces",
     link: "https://mahquilts.blogspot.com/2026/02/sock-hop.html",
-    gridNote: "Scraps, satin stitch · 92 × 82 in · 3,500 pieces",
-    gridTag: "1994",
     cover: {
       src: "/quilts/sock-hop-1.jpg",
       alt: "Sock Hop scrap quilt",
@@ -94,17 +90,14 @@ export const quilts: Piece[] = [
       {
         src: "/quilts/sock-hop-2.jpg",
         alt: "The poem written on the back",
-        cap: 537,
       },
       {
         src: "/quilts/sock-hop-3.jpg",
         alt: "Detail",
-        cap: 278,
       },
       {
         src: "/quilts/sock-hop-4.jpg",
         alt: "The graffiti backing fabric",
-        cap: 278,
       },
     ],
     body: [
@@ -115,11 +108,10 @@ export const quilts: Piece[] = [
     ],
   },
   {
+    slug: "i-scream-you-scream",
     title: "I Scream, You Scream",
     meta: "Bali batiks · quilted by Sandy Klop",
     link: "https://mahquilts.blogspot.com/2026/02/i-scream-you-scream.html",
-    gridNote: "Antique red buttons for the cherry on top",
-    gridTag: "Bali batiks",
     cover: {
       src: "/quilts/i-scream-1.jpg",
       alt: "I Scream, You Scream — ice cream cone quilt in batiks",
@@ -128,22 +120,18 @@ export const quilts: Piece[] = [
       {
         src: "/quilts/i-scream-1.jpg",
         alt: "The ice cream cone quilt",
-        cap: 417,
       },
       {
         src: "/quilts/i-scream-2.jpg",
         alt: "Detail — an antique red button for the cherry on top",
-        cap: 346,
       },
       {
         src: "/quilts/i-scream-3.jpg",
         alt: "In Patchwork Quilts magazine",
-        cap: 430,
       },
       {
         src: "/quilts/i-scream-4.jpg",
         alt: "In Georgia Bonesteel’s “Quiltmaking Legacy”",
-        cap: 422,
       },
     ],
     body: [
@@ -154,11 +142,10 @@ export const quilts: Piece[] = [
     ],
   },
   {
+    slug: "my-sunbonnet-sue",
     title: "My Sunbonnet Sue",
     meta: "Early work · designed and sewn by me, quilted by my mother",
     link: "https://mahquilts.blogspot.com/2026/02/my-sunbonnet-sue.html",
-    gridNote: "Embroidered linens and flea-market finds · quilted by my mother",
-    gridTag: "Early work",
     cover: {
       src: "/quilts/sunbonnet-sue-1.jpg",
       alt: "My Sunbonnet Sue quilt detail",
@@ -188,11 +175,10 @@ export const quilts: Piece[] = [
     ],
   },
   {
+    slug: "light-and-twinkle",
     title: "Light and Twinkle",
     meta: "Wall quilt · scraps from Bali Fabrications",
     link: "https://mahquilts.blogspot.com/2026/02/dynamic-design-part-2.html",
-    gridNote: "Bali Fabrications scraps · taken apart once, and better for it",
-    gridTag: "Wall quilt",
     cover: {
       src: "/quilts/light-twinkle-1.jpg",
       alt: "Bali scrap wall quilt with filtered light",
@@ -201,12 +187,10 @@ export const quilts: Piece[] = [
       {
         src: "/quilts/light-twinkle-1.jpg",
         alt: "The finished wall quilt",
-        cap: 406,
       },
       {
         src: "/quilts/light-twinkle-2.jpg",
         alt: "Chopped corners filled with bright scraps",
-        cap: 284,
       },
     ],
     body: [

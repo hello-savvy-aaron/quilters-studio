@@ -5,13 +5,15 @@ import type { Piece } from "./collections";
  * Put images in /public/glass-towers/ and follow the shape used in lib/quilts.ts:
  *
  * {
+ *   slug: "tower-name",
  *   title: "Tower name",
- *   meta: "2025 · glass · 24 in",
- *   gridNote: "One line for the gallery card",
- *   gridTag: "2025",
+ *   quote: "A line about the piece, in Mary Anne's words.", // optional
+ *   dimensions: "24 in tall", // optional
+ *   year: "2025", // optional
+ *   meta: "Glass · anything else worth noting",
  *   cover: { src: "/glass-towers/tower-name-1.jpg", alt: "Tower name" },
  *   images: [{ src: "/glass-towers/tower-name-1.jpg", alt: "Tower name, front" }],
- *   body: ["A paragraph or two about the piece."],
+ *   body: ["The full story, a paragraph per line."],
  * }
  */
 export const glassTowers: Piece[] = [];

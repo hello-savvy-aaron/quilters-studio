@@ -1,36 +1,35 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Inter, Source_Serif_4 } from "next/font/google";
+import { Figtree, Newsreader } from "next/font/google";
 import SiteFooter from "@/components/SiteFooter";
-import SiteHeader from "@/components/SiteHeader";
 import "./globals.css";
 
-const sourceSerif = Source_Serif_4({
+const newsreader = Newsreader({
   subsets: ["latin"],
-  weight: ["400", "600"],
+  weight: ["300", "400"],
   style: ["normal", "italic"],
-  variable: "--font-source-serif",
+  variable: "--font-newsreader",
 });
 
-const inter = Inter({
+const figtree = Figtree({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-inter",
+  weight: ["400", "500", "600"],
+  variable: "--font-figtree",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.quilters.studio"),
   title: {
-    default: "Mary Anne Henderson — Studio",
-    template: "%s — Mary Anne Henderson",
+    default: "Quilters Studio — Mary Anne Henderson",
+    template: "%s — Quilters Studio",
   },
   description:
-    "Mary Anne Henderson — quilter, Marietta, Georgia. Fifty years of scraps: the quilts, the design process, and the journal.",
+    "Mary Anne Henderson — quilter. Fifty years of scraps: the quilts, the design process, and the journal.",
   openGraph: {
-    title: "Mary Anne Henderson — Studio",
-    description: "Fifty years of scrap quilts, and the stories behind them.",
+    title: "Quilters Studio — Mary Anne Henderson",
+    description: "Every quilt has a story. Fifty years of scrap quilts, and the stories behind them.",
     url: "https://www.quilters.studio",
-    siteName: "Mary Anne Henderson Studio",
+    siteName: "Quilters Studio",
     type: "website",
   },
 };
@@ -41,13 +40,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${sourceSerif.variable} ${inter.variable}`}>
+    <html lang="en" className={`${newsreader.variable} ${figtree.variable}`}>
       <body>
-        <div className="shell">
-          <SiteHeader />
-          <main>{children}</main>
-          <SiteFooter />
-        </div>
+        {children}
+        <SiteFooter />
         <Analytics />
       </body>
     </html>

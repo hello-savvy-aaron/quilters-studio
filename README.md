@@ -1,39 +1,36 @@
 # Quilters Studio
 
-Studio site for Mary Anne Henderson — quilter, Marietta, Georgia.
-Collections of work (quilts now, glass towers to come), an essay on design, and the journal.
+Studio site for Mary Anne Henderson, quilter.
 
-Built with Next.js 16 / React 19 / Tailwind 4 (same stack as the hello-savvy apps).
-The look is a gallery-style system: Source Serif 4 for display headlines, Inter for
-body and labels, one accent (`#0f6f8f`), hairlines, and large images with
-gallery-style captions. Tokens live at the top of `app/globals.css`.
+Built with Next.js 16 / React 19 / Tailwind 4. The design is the "L · Index and Pull Quote" direction:
+a sage page with deep-green circles in the hero, cream cards, Newsreader headlines, Figtree body,
+pill buttons, and a terracotta accent. Tokens are at the top of `app/globals.css`.
 
 ## Pages
 
-- `/` — Mary Anne's biography and portraits, then the collections, a pointer to
-  the essay and the latest journal entries, and contact.
-- `/quilts`, `/glass-towers` — one page per collection, generated from `lib/collections.ts`.
-  Each work opens in an overlay with more views and its story.
-- `/on-design` — the design essay ("They stick to me like lint") with the animated design wall.
-- `/journal` — new entries written on the site (`/journal/<slug>`) followed by the older
-  posts on mahquilts.blogspot.com (listed in `lib/quilts.ts`).
-- `/admin` — where Mary Anne writes new journal entries. Visit `/admin?admin=true` once in a
-  browser to remember it (it sets an `admin` cookie; this is deliberately not real auth).
-  Posts and photos are stored in Vercel Blob, so the project needs a Blob store connected
-  (Vercel dashboard → Storage), which provides `BLOB_STORE_ID` (or `BLOB_READ_WRITE_TOKEN`).
-- `/family-stories` and `/family-stories/<slug>` — Mary Anne's family history, written on the site
-  itself. Stories live in `lib/family-stories.ts`; add an object and it gets a page.
+- `/` — hero, a "Jump to" row, then one card per quilt (`lib/quilts.ts`): main photo, "No. NN" and a
+  dimensions/year chip, a thumbnail gallery, and the story. `/quilts` redirects here.
+- `/about`, `/contact` — About copy and the contact form.
+- `/on-design` — the essay, titled **Talking Design** (the URL is unchanged).
+- `/journal`, `/family-stories` — written on the site; `/admin?admin=true` is where journal entries are posted
+  (Vercel Blob storage).
 
-## Adding a collection or a work
+## Adding to a quilt
 
-- Works for each collection live in their own file (`lib/quilts.ts`, `lib/glass-towers.ts`);
-  `lib/collections.ts` lists the collections and their intro copy.
-- To add a glass tower: put the photos in `public/glass-towers/` and add an entry to
-  `lib/glass-towers.ts` (there is a template in the file). The page fills in on the next deploy.
-- To add a whole new collection: create `lib/<name>.ts`, add it to the `collections` array,
-  and it gets a page, a card on the home page, and a nav link automatically.
+Edit its entry in `lib/quilts.ts`. Every field except `slug`, `title`, `cover`, `images`, `body` and `meta` is
+optional, and anything left out simply doesn't show: `quote` (pull quote), `dimensions`, `year`.
+Photos go in `public/quilts/`. The first photo in `images` that differs from `cover` starts the gallery; a
+single extra photo shows with no thumbnails, and none collapses the middle column.
 
-Header and footer live in `components/` and are rendered from `app/layout.tsx`.
+## Glass Towers (hidden)
+
+`published: false` on the collection in `lib/collections.ts` removes it from the footer, sitemap and the web
+(`/glass-towers` is a 404). The code and `lib/glass-towers.ts` stay. Set it to `true` to bring it back.
+
+## Contact form
+
+`app/contact/actions.ts` validates and has a honeypot spam trap, but **delivery is not connected yet** (`deliver()`
+returns false, so visitors see "couldn't be sent"). Nothing is stored or forwarded.
 
 ## Develop
 

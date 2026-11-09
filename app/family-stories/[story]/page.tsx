@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import PageHero from "@/components/PageHero";
 import { familyStories, getFamilyStory } from "@/lib/family-stories";
 
 type Params = { story: string };
@@ -27,49 +28,52 @@ export default async function FamilyStoryPage({ params }: { params: Promise<Para
 
   return (
     <>
-      <section className="page-head">
-        <p className="kicker">
-          <Link href="/family-stories" className="muted">
-            Family stories
-          </Link>{" "}
-          · {story.date}
-        </p>
-        <h1 className="display-lg" style={{ maxWidth: "16ch", marginBottom: 36 }}>
-          {story.title}
-        </h1>
-        <div className="prose story-body">
-          {story.body.map((t, i) =>
-            typeof t === "string" ? (
-              <p key={i}>{t}</p>
-            ) : "heading" in t ? (
-              <h2 key={i}>{t.heading}</h2>
-            ) : (
-              <figure key={i}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={t.image} alt={t.alt} loading="lazy" />
-                {t.caption && <figcaption>{t.caption}</figcaption>}
-              </figure>
-            ),
+      <PageHero
+        kicker={
+          <>
+            <Link href="/family-stories">Family stories</Link> · {story.date}
+          </>
+        }
+        title={story.title}
+      />
+      <main className="container page-main">
+        <article className="panel panel-reading">
+          <div className="prose story-body">
+            {story.body.map((t, i) =>
+              typeof t === "string" ? (
+                <p key={i}>{t}</p>
+              ) : "heading" in t ? (
+                <h2 key={i}>{t.heading}</h2>
+              ) : (
+                <figure key={i}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={t.image} alt={t.alt} loading="lazy" />
+                  {t.caption && <figcaption>{t.caption}</figcaption>}
+                </figure>
+              ),
+            )}
+          </div>
+        </article>
+        <nav className="piece-nav" aria-label="More family stories">
+          {older ? (
+            <Link className="pill" href={`/family-stories/${older.slug}`}>
+              <span aria-hidden="true">←</span> {older.title}
+            </Link>
+          ) : (
+            <span />
           )}
-        </div>
-      </section>
-
-      <div className="rule" style={{ margin: "56px 0 20px" }} />
-      <div className="story-nav">
-        <span>
-          {older && (
-            <Link href={`/family-stories/${older.slug}`}>← {older.title}</Link>
+          <Link className="pill" href="/family-stories">
+            All stories
+          </Link>
+          {newer ? (
+            <Link className="pill" href={`/family-stories/${newer.slug}`}>
+              {newer.title} <span aria-hidden="true">→</span>
+            </Link>
+          ) : (
+            <span />
           )}
-        </span>
-        <Link href="/family-stories" className="muted">
-          All stories
-        </Link>
-        <span style={{ textAlign: "right" }}>
-          {newer && (
-            <Link href={`/family-stories/${newer.slug}`}>{newer.title} →</Link>
-          )}
-        </span>
-      </div>
+        </nav>
+      </main>
     </>
   );
 }

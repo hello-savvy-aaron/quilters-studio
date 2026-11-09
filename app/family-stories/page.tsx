@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
 import { familyStories } from "@/lib/family-stories";
 
 export const metadata: Metadata = {
@@ -10,39 +11,35 @@ export const metadata: Metadata = {
 export default function FamilyStories() {
   return (
     <>
-      <section className="page-head">
-        <p className="kicker">Family stories</p>
-        <h1 className="display-xl" style={{ maxWidth: "14ch", marginBottom: 20 }}>
-          Written down while I remember.
-        </h1>
-        <p className="muted" style={{ fontSize: 16, maxWidth: "52ch", margin: 0 }}>
-          I&apos;m putting down as much of our family&apos;s history as I can, a story at a time. New
-          ones are added here as they&apos;re written.
-        </p>
-      </section>
-
-      <div className="rule" style={{ margin: "48px 0 0" }} />
-
-      <ul className="list-plain">
-        {familyStories.map((s) => (
-          <li key={s.slug}>
-            <Link href={`/family-stories/${s.slug}`} className="story-row">
-              <span className="eyebrow muted">{s.date}</span>
-              <span>
-                <span className="entry-title" style={{ display: "block", margin: "0 0 6px" }}>
-                  {s.title}
-                </span>
-                <span className="muted" style={{ fontSize: 15 }}>
-                  {s.summary}
-                </span>
-              </span>
-              <span className="muted" aria-hidden="true">
-                →
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <PageHero
+        kicker="Family stories"
+        title="Written down while I remember."
+        lede="I’m putting down as much of our family’s history as I can, a story at a time. New ones are added here as they’re written."
+      />
+      <main className="container page-main">
+        <div className="panel">
+          <ul className="list-plain">
+            {familyStories.map((s) => (
+              <li key={s.slug}>
+                <Link href={`/family-stories/${s.slug}`} className="story-row">
+                  <span className="eyebrow muted">{s.date}</span>
+                  <span>
+                    <span className="entry-title" style={{ display: "block", margin: "0 0 6px" }}>
+                      {s.title}
+                    </span>
+                    <span className="muted" style={{ fontSize: 15 }}>
+                      {s.summary}
+                    </span>
+                  </span>
+                  <span className="muted" aria-hidden="true">
+                    →
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </main>
     </>
   );
 }

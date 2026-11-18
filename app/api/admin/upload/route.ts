@@ -2,6 +2,8 @@ import { issueSignedToken } from "@vercel/blob";
 import { handleUploadPresigned, type HandleUploadPresignedBody } from "@vercel/blob/client";
 import { isAdmin } from "@/lib/admin";
 
+const FOLDERS = ["journal/photos/", "quilts/photos/"];
+
 export async function POST(request: Request) {
   const body = (await request.json()) as HandleUploadPresignedBody;
   try {
@@ -10,6 +12,7 @@ export async function POST(request: Request) {
       request,
       getSignedToken: async (pathname) => {
         if (!(await isAdmin())) throw new Error("Not allowed");
+        if (!FOLDERS.some((f) => pathname.startsWith(f))) throw new Error("Not allowed");
         const limits = {
           allowedContentTypes: ["image/jpeg", "image/png", "image/webp", "image/gif"],
           maximumSizeInBytes: 40 * 1024 * 1024,

@@ -446,7 +446,7 @@ textarea.input { min-height: 160px; padding: 14px 16px; line-height: 1.5; resize
 .placeholder-stack { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 60%; }
 .placeholder-tier { height: 22px; background: var(--green); border-radius: 2px; }
 
-/* — admin: the journal entry form — */
+/* — admin: the quilt and journal entry forms — */
 .admin-form { display: grid; gap: 28px; max-width: 720px; }
 .admin-form .input { font-size: 17px; }
 .admin-form textarea.input { line-height: 1.6; }
@@ -472,6 +472,15 @@ textarea.input { min-height: 160px; padding: 14px 16px; line-height: 1.5; resize
 .admin-photos img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
 .admin-photos li { display: grid; gap: 4px; justify-items: start; }
 .admin-error { color: var(--brick); font-size: 15px; margin: 0; }
+.admin-hint { font-size: 15px; margin: 0 0 12px; }
+.admin-photos-captioned { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
+.admin-photos-captioned .input { width: 100%; font-size: 15px; padding: 8px 12px; }
+.admin-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+.admin-more summary { cursor: pointer; font-weight: 600; color: var(--green-deep); }
+.admin-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.admin-list li { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.admin-list img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
+.admin-list a { flex: 1 1 200px; font-size: 17px; color: var(--green-deep); }
 
 /* — responsive — */
 @media (max-width: 960px) {

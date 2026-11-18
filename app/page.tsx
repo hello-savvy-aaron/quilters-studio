@@ -1,8 +1,9 @@
 import PageHero from "@/components/PageHero";
 import QuiltIndex from "@/components/QuiltIndex";
-import { quilts } from "@/lib/quilts";
+import { getAllQuilts } from "@/lib/studio-quilts";
 
-export default function Home() {
+export default async function Home() {
+  const quilts = await getAllQuilts();
   return (
     <>
       <PageHero

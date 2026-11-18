@@ -12,8 +12,18 @@ pill buttons, and a terracotta accent. Tokens are at the top of `app/globals.css
   dimensions/year chip, a thumbnail gallery, and the story. `/quilts` redirects here.
 - `/about`, `/contact` — About copy and the contact form.
 - `/on-design` — the essay, titled **Talking Design** (the URL is unchanged).
-- `/journal`, `/family-stories` — written on the site; `/admin?admin=true` is where journal entries are posted
-  (Vercel Blob storage).
+- `/journal`, `/family-stories` — written on the site.
+- `/admin` — add a quilt (photos, story, optional pull quote/size/year/details) or remove one added there;
+  `/admin/journal` posts journal entries. Both store in Vercel Blob. Quilts added here show on the home page
+  after the ones in `lib/quilts.ts`.
+
+## Admin access
+
+An admin is anyone visiting from an address listed in the `ADMIN_IPS` environment variable (Vercel → Settings →
+Environment Variables), comma-separated, e.g. `203.0.113.7` or a range like `2600:1700:abcd:1234::/64`. Everyone
+else sees "Nothing to see here." Until `ADMIN_IPS` is set, `/admin` shows the visitor their own address to copy in.
+Home internet addresses can change; if `/admin` stops working, update the variable and redeploy.
+`pnpm dev` on your own computer always counts as admin.
 
 ## Adding to a quilt
 

@@ -1,19 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { PhotoDrop, photoStatus, usePhotoUploads } from "./PhotoDrop";
+import { PhotoDrop, PhotoThumb, photoStatus, usePhotoUploads } from "./PhotoDrop";
 import { addQuilt } from "./actions";
 
 const EMPTY = { title: "", story: "", quote: "", dimensions: "", year: "", meta: "" };
 
 export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
   const [fields, setFields] = useState(EMPTY);
-  const { photos, addFiles, update, remove, makeFirst, clear, uploading, skippedMessage } =
+  const { photos, addFiles, update, remove, retry, makeFirst, move, clear, uploading, skippedMessage } =
     usePhotoUploads("quilts/photos");
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [addedSlug, setAddedSlug] = useState("");
+
+  // A stray swipe back on a phone shouldn't throw away a half-written quilt.
+  const dirty = !addedSlug && (photos.length > 0 || fields.title !== "" || fields.story !== "");
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (e: BeforeUnloadEvent) => e.preventDefault();
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
 
   const set = (key: keyof typeof EMPTY) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setFields((f) => ({ ...f, [key]: e.target.value }));
@@ -70,31 +79,63 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
 
       <div className="field">
         <label htmlFor="q-title">Name of the quilt</label>
-        <input id="q-title" className="input" value={fields.title} onChange={set("title")} required />
+        <input
+          id="q-title"
+          className="input"
+          value={fields.title}
+          onChange={set("title")}
+          autoCapitalize="words"
+          enterKeyHint="next"
+          required
+        />
       </div>
 
       <div className="field">
         <label>Photos</label>
         <p className="muted admin-hint">The first photo is the big one. The rest show in the gallery beside it.</p>
-        <PhotoDrop onFiles={addFiles} />
         {photos.length > 0 && (
           <ul className="admin-photos admin-photos-captioned">
             {photos.map((p, i) => (
               <li key={p.id}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.preview} alt="" style={{ opacity: p.url ? 1 : 0.5 }} />
-                <span className="eyebrow muted">
-                  {i === 0 ? "Main photo · " : ""}
-                  {photoStatus(p)}
-                </span>
+                <div className="admin-thumb">
+                  <PhotoThumb photo={p} />
+                  {i === 0 && <span className="admin-badge">Main photo</span>}
+                  {i > 0 && (
+                    <button
+                      type="button"
+                      className="admin-nudge admin-nudge-left"
+                      aria-label="Move earlier"
+                      onClick={() => move(p.id, -1)}
+                    >
+                      ←
+                    </button>
+                  )}
+                  {i < photos.length - 1 && (
+                    <button
+                      type="button"
+                      className="admin-nudge admin-nudge-right"
+                      aria-label="Move later"
+                      onClick={() => move(p.id, 1)}
+                    >
+                      →
+                    </button>
+                  )}
+                </div>
+                <span className={`eyebrow ${p.failed ? "admin-error" : "muted"}`}>{photoStatus(p)}</span>
                 <input
                   className="input"
                   aria-label={`Caption for photo ${i + 1}`}
-                  placeholder="Caption (optional)"
+                  placeholder="Caption"
+                  enterKeyHint="done"
                   value={p.caption}
                   onChange={(e) => update(p.id, { caption: e.target.value })}
                 />
-                <span style={{ display: "flex", gap: 4, flexWrap: "wrap" }}>
+                <span className="admin-photo-actions">
+                  {p.failed && (
+                    <button type="button" className="btn btn-ghost" onClick={() => retry(p.id)}>
+                      Try again
+                    </button>
+                  )}
                   {i > 0 && (
                     <button type="button" className="btn btn-ghost" onClick={() => makeFirst(p.id)}>
                       Make main
@@ -108,6 +149,7 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
             ))}
           </ul>
         )}
+        <PhotoDrop onFiles={addFiles} more={photos.length > 0} />
       </div>
 
       <div className="field">
@@ -115,7 +157,7 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
         <textarea
           id="q-story"
           className="input"
-          rows={14}
+          rows={12}
           value={fields.story}
           onChange={set("story")}
           placeholder="Leave a blank line between paragraphs."
@@ -149,7 +191,7 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
             </div>
             <div className="field">
               <label htmlFor="q-year">Year</label>
-              <input id="q-year" className="input" value={fields.year} onChange={set("year")} placeholder="2024" />
+              <input id="q-year" className="input" value={fields.year} onChange={set("year")} placeholder="2024" inputMode="numeric" />
             </div>
           </div>
           <div className="field">
@@ -167,7 +209,7 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
 
       {(error || skippedMessage) && <p className="admin-error">{error || skippedMessage}</p>}
 
-      <div>
+      <div className="admin-submit">
         <button type="submit" className="btn btn-primary" disabled={saving || uploading}>
           {saving ? "Saving…" : uploading ? "Waiting for photos…" : "Add to the site"}
         </button>

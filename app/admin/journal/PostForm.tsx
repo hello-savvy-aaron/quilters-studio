@@ -1,17 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { PhotoDrop, photoStatus, usePhotoUploads } from "../PhotoDrop";
+import { PhotoDrop, PhotoThumb, photoStatus, usePhotoUploads } from "../PhotoDrop";
 import { publishPost } from "./actions";
 
 export default function PostForm({ storageReady }: { storageReady: boolean }) {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
-  const { photos, addFiles, remove, clear, uploading, skippedMessage } = usePhotoUploads("journal/photos");
+  const { photos, addFiles, remove, retry, clear, uploading, skippedMessage } = usePhotoUploads("journal/photos");
   const [publishing, setPublishing] = useState(false);
   const [error, setError] = useState("");
   const [publishedSlug, setPublishedSlug] = useState("");
+
+  // A stray swipe back on a phone shouldn't throw away a half-written entry.
+  const dirty = !publishedSlug && (photos.length > 0 || title !== "" || text !== "");
+  useEffect(() => {
+    if (!dirty) return;
+    const warn = (e: BeforeUnloadEvent) => e.preventDefault();
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -83,7 +92,7 @@ export default function PostForm({ storageReady }: { storageReady: boolean }) {
         <textarea
           id="text"
           className="input"
-          rows={14}
+          rows={12}
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Leave a blank line between paragraphs."
@@ -93,29 +102,34 @@ export default function PostForm({ storageReady }: { storageReady: boolean }) {
 
       <div className="field">
         <label>Photos</label>
-        <PhotoDrop onFiles={addFiles} />
-
         {photos.length > 0 && (
           <ul className="admin-photos">
             {photos.map((p) => (
               <li key={p.id}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.preview} alt="" style={{ opacity: p.url ? 1 : 0.5 }} />
-                <span className="eyebrow muted">
-                  {photoStatus(p)}
+                <div className="admin-thumb">
+                  <PhotoThumb photo={p} />
+                </div>
+                <span className={`eyebrow ${p.failed ? "admin-error" : "muted"}`}>{photoStatus(p)}</span>
+                <span className="admin-photo-actions">
+                  {p.failed && (
+                    <button type="button" className="btn btn-ghost" onClick={() => retry(p.id)}>
+                      Try again
+                    </button>
+                  )}
+                  <button type="button" className="btn btn-ghost" onClick={() => remove(p.id)}>
+                    Remove
+                  </button>
                 </span>
-                <button type="button" className="btn btn-ghost" onClick={() => remove(p.id)}>
-                  Remove
-                </button>
               </li>
             ))}
           </ul>
         )}
+        <PhotoDrop onFiles={addFiles} more={photos.length > 0} />
       </div>
 
       {(error || skippedMessage) && <p className="admin-error">{error || skippedMessage}</p>}
 
-      <div>
+      <div className="admin-submit">
         <button type="submit" className="btn btn-primary" disabled={publishing || uploading}>
           {publishing ? "Publishing…" : uploading ? "Waiting for photos…" : "Publish"}
         </button>

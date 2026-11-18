@@ -15,7 +15,9 @@ pill buttons, and a terracotta accent. Tokens are at the top of `app/globals.css
 - `/journal`, `/family-stories` — written on the site.
 - `/admin` — add a quilt (photos, story, optional pull quote/size/year/details) or remove one added there;
   `/admin/journal` posts journal entries. Both store in Vercel Blob. Quilts added here show on the home page
-  after the ones in `lib/quilts.ts`.
+  after the ones in `lib/quilts.ts`. Built for a phone: iPhone HEIC photos are converted to JPEG in the browser
+  (Safari does it natively; other browsers load the `heic-to` decoder only when needed), turned the right way up,
+  and shrunk to 2400px on the long edge before uploading (`app/admin/prepare-photo.ts`).
 
 ## Admin access
 

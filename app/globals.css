@@ -448,10 +448,14 @@ textarea.input { min-height: 160px; padding: 14px 16px; line-height: 1.5; resize
 
 /* — admin: the quilt and journal entry forms — */
 .admin-form { display: grid; gap: 28px; max-width: 720px; }
-.admin-form .input { font-size: 17px; }
+.admin-form .input { font-size: 17px; } /* 16px+ keeps iPhone Safari from zooming in on tap */
 .admin-form textarea.input { line-height: 1.6; }
 .admin-drop {
-  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 40px 24px;
   text-align: center;
   font-size: 16px;
   color: var(--ink-4);
@@ -459,27 +463,74 @@ textarea.input { min-height: 160px; padding: 14px 16px; line-height: 1.5; resize
   border: 2px dashed var(--line-input);
   border-radius: 16px;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
-.admin-drop:hover, .admin-drop.is-dragging { border-color: var(--green); color: var(--green); background: var(--sage-tint); }
+.admin-drop:hover, .admin-drop:active, .admin-drop.is-dragging { border-color: var(--green); color: var(--green); background: var(--sage-tint); }
+.admin-drop-icon { font-size: 32px; line-height: 1; font-weight: 300; }
+.admin-photos + .admin-drop { margin-top: 16px; padding: 24px; }
+.on-touch { display: none; }
+@media (hover: none) and (pointer: coarse) {
+  .on-touch { display: inline; }
+  .on-pointer { display: none; }
+}
 .admin-photos {
   list-style: none;
   padding: 0;
-  margin: 16px 0 0;
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 16px;
+  gap: 20px 16px;
 }
-.admin-photos img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
-.admin-photos li { display: grid; gap: 4px; justify-items: start; }
+.admin-photos li { display: grid; gap: 6px; align-content: start; min-width: 0; }
+.admin-thumb { position: relative; }
+.admin-thumb img, .admin-thumb-wait { display: block; width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; }
+.admin-thumb-wait { background: var(--sage-tint); animation: admin-pulse 1.4s ease-in-out infinite; }
+@keyframes admin-pulse { 50% { opacity: 0.5; } }
+.admin-badge {
+  position: absolute;
+  left: 8px;
+  top: 8px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--green-deep);
+  color: #fff;
+}
+.admin-photo-actions { display: flex; flex-wrap: wrap; gap: 0 4px; margin-left: -10px; }
+.admin-photo-actions .btn { min-height: 44px; }
+.admin-nudge {
+  position: absolute;
+  bottom: 8px;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: 50%;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--green-deep);
+  box-shadow: 0 2px 8px rgba(11, 61, 51, 0.25);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.admin-nudge-left { left: 8px; }
+.admin-nudge-right { right: 8px; }
 .admin-error { color: var(--brick); font-size: 15px; margin: 0; }
 .admin-hint { font-size: 15px; margin: 0 0 12px; }
 .admin-photos-captioned { grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); }
-.admin-photos-captioned .input { width: 100%; font-size: 15px; padding: 8px 12px; }
+.admin-photos-captioned .input { min-height: 44px; padding: 8px 12px; }
 .admin-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
 .admin-more summary { cursor: pointer; font-weight: 600; color: var(--green-deep); }
 .admin-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
 .admin-list li { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .admin-list img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
+.admin-more summary { padding: 10px 0; }
+@media (max-width: 640px) {
+  .admin-form { gap: 24px; }
+  .admin-photos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 12px; }
+  .admin-submit .btn { width: 100%; min-height: 54px; font-size: 17px; }
+}
 .admin-list a { flex: 1 1 200px; font-size: 17px; color: var(--green-deep); }
 
 /* — responsive — */

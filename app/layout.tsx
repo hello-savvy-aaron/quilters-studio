@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import localFont from "next/font/local";
 import SiteFooter from "@/components/SiteFooter";
+import { HELLO_SAVVY, HELLO_SAVVY_URL } from "@/lib/credits";
 import "./globals.css";
 
 // The font files live in app/fonts (SIL Open Font License) so builds don't depend on reaching Google Fonts.
@@ -32,6 +33,9 @@ export const metadata: Metadata = {
     default: "Quilters Studio — Mary Anne Henderson",
     template: "%s — Quilters Studio",
   },
+  authors: [{ name: "Mary Anne Henderson" }],
+  creator: HELLO_SAVVY,
+  other: { designer: `${HELLO_SAVVY} (${HELLO_SAVVY_URL})` },
   description:
     "Mary Anne Henderson — quilter. Fifty years of scraps: the quilts, the design process, and the journal.",
   openGraph: {

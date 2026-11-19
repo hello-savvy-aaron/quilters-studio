@@ -4,6 +4,7 @@ import { adminIpsConfigured, clientIp, isAdmin } from "@/lib/admin";
 import { blobConfigured } from "@/lib/blob-config";
 import { getStudioQuilts } from "@/lib/studio-quilts";
 import PageHero from "@/components/PageHero";
+import { HELLO_SAVVY, HELLO_SAVVY_URL } from "@/lib/credits";
 import QuiltForm from "./QuiltForm";
 import RemoveQuiltButton from "./RemoveQuiltButton";
 
@@ -54,6 +55,13 @@ export default async function AdminPage() {
           <Link href="/admin/journal" className="btn btn-secondary">
             Write a journal entry instead
           </Link>
+        </p>
+        <p className="muted admin-help">
+          Something not working, or want a change to the site? Get in touch with{" "}
+          <a href={HELLO_SAVVY_URL} target="_blank" rel="noopener">
+            {HELLO_SAVVY}
+          </a>
+          , who designed it.
         </p>
       </main>
     </>

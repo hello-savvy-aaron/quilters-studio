@@ -523,6 +523,8 @@ textarea.input { min-height: 160px; padding: 14px 16px; line-height: 1.5; resize
 .admin-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
 .admin-more summary { cursor: pointer; font-weight: 600; color: var(--green-deep); }
 .admin-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.admin-help { margin-top: 24px; font-size: 15px; }
+.admin-help a { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
 .admin-list li { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
 .admin-list img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; }
 .admin-more summary { padding: 10px 0; }

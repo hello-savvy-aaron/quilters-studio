@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { publishedCollections } from "@/lib/collections";
+import { HELLO_SAVVY_URL } from "@/lib/credits";
 
 const more = [
   { href: "/journal", label: "Journal" },
@@ -38,8 +39,9 @@ export default function SiteFooter() {
           ))}
         </nav>
         <p className="footer-note">
-          © {new Date().getFullYear()} Mary Anne Henderson · Site by{" "}
-          <a href="https://hellosavvy.design" target="_blank" rel="noopener noreferrer">
+          © {new Date().getFullYear()} Mary Anne Henderson · Website design by{" "}
+          {/* No "noreferrer", so Hello Savvy can see visits that come from this site. */}
+          <a href={HELLO_SAVVY_URL} target="_blank" rel="noopener">
             Hello Savvy
           </a>
         </p>

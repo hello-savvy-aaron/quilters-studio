@@ -1,20 +1,29 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
-import { Figtree, Newsreader } from "next/font/google";
+import localFont from "next/font/local";
 import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  weight: ["300", "400"],
-  style: ["normal", "italic"],
+// The font files live in app/fonts (SIL Open Font License) so builds don't depend on reaching Google Fonts.
+const newsreader = localFont({
+  src: [
+    { path: "./fonts/newsreader-latin-300-normal.woff2", weight: "300", style: "normal" },
+    { path: "./fonts/newsreader-latin-300-italic.woff2", weight: "300", style: "italic" },
+    { path: "./fonts/newsreader-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/newsreader-latin-400-italic.woff2", weight: "400", style: "italic" },
+  ],
   variable: "--font-newsreader",
+  fallback: ["Georgia", "serif"],
 });
 
-const figtree = Figtree({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+const figtree = localFont({
+  src: [
+    { path: "./fonts/figtree-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/figtree-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/figtree-latin-600-normal.woff2", weight: "600", style: "normal" },
+  ],
   variable: "--font-figtree",
+  fallback: ["system-ui", "sans-serif"],
 });
 
 export const metadata: Metadata = {

@@ -3,20 +3,27 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { PhotoDrop, PhotoThumb, photoStatus, usePhotoUploads } from "./PhotoDrop";
-import { addQuilt } from "./actions";
+import { saveQuilt } from "./actions";
 
 const EMPTY = { title: "", story: "", quote: "", dimensions: "", year: "", meta: "" };
+type Fields = typeof EMPTY;
 
-export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
-  const [fields, setFields] = useState(EMPTY);
+export type QuiltToEdit = { slug: string; fields: Fields; photos: { url: string; caption: string }[] };
+
+/** Adds a new quilt, or with `editing`, changes an existing one. */
+export default function QuiltForm({ storageReady, editing }: { storageReady: boolean; editing?: QuiltToEdit }) {
+  const [fields, setFields] = useState<Fields>(editing?.fields ?? EMPTY);
   const { photos, addFiles, update, remove, retry, makeFirst, move, clear, uploading, skippedMessage } =
-    usePhotoUploads("quilts/photos");
+    usePhotoUploads("quilts/photos", editing?.photos);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [addedSlug, setAddedSlug] = useState("");
 
   // A stray swipe back on a phone shouldn't throw away a half-written quilt.
-  const dirty = !addedSlug && (photos.length > 0 || fields.title !== "" || fields.story !== "");
+  const snapshot = (f: Fields, ph: { url?: string; caption: string }[]) =>
+    JSON.stringify([f, ph.map((p) => [p.url, p.caption])]);
+  const [initial] = useState(() => snapshot(editing?.fields ?? EMPTY, editing?.photos ?? []));
+  const dirty = !addedSlug && snapshot(fields, photos) !== initial;
   useEffect(() => {
     if (!dirty) return;
     const warn = (e: BeforeUnloadEvent) => e.preventDefault();
@@ -32,10 +39,10 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
     setSaving(true);
     setError("");
     try {
-      const result = await addQuilt({
-        ...fields,
-        photos: photos.flatMap((p) => (p.url ? [{ url: p.url, caption: p.caption }] : [])),
-      });
+      const result = await saveQuilt(
+        { ...fields, photos: photos.flatMap((p) => (p.url ? [{ url: p.url, caption: p.caption }] : [])) },
+        editing?.slug,
+      );
       if ("error" in result && result.error) setError(result.error);
       else if ("slug" in result && result.slug) setAddedSlug(result.slug);
     } catch {
@@ -43,6 +50,22 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
     } finally {
       setSaving(false);
     }
+  }
+
+  if (addedSlug && editing) {
+    return (
+      <div className="admin-form">
+        <p className="lead">Your changes are saved and on the site.</p>
+        <p style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <Link href={`/#${addedSlug}`} className="btn btn-primary">
+            See it on the site
+          </Link>
+          <Link href="/admin" className="btn btn-secondary">
+            Back to all quilts
+          </Link>
+        </p>
+      </div>
+    );
   }
 
   if (addedSlug) {
@@ -165,7 +188,7 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
         />
       </div>
 
-      <details className="admin-more">
+      <details className="admin-more" open={Boolean(editing && (editing.fields.quote || editing.fields.dimensions || editing.fields.year || editing.fields.meta))}>
         <summary>More details (all optional)</summary>
         <div className="admin-form" style={{ marginTop: 20 }}>
           <div className="field">
@@ -211,8 +234,13 @@ export default function QuiltForm({ storageReady }: { storageReady: boolean }) {
 
       <div className="admin-submit">
         <button type="submit" className="btn btn-primary" disabled={saving || uploading}>
-          {saving ? "Saving…" : uploading ? "Waiting for photos…" : "Add to the site"}
+          {saving ? "Saving…" : uploading ? "Waiting for photos…" : editing ? "Save changes" : "Add to the site"}
         </button>
+        {editing && (
+          <Link href="/admin" className="btn btn-ghost">
+            Cancel
+          </Link>
+        )}
       </div>
     </form>
   );

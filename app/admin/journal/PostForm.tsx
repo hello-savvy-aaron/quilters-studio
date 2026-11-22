@@ -5,16 +5,24 @@ import Link from "next/link";
 import { PhotoDrop, PhotoThumb, photoStatus, usePhotoUploads } from "../PhotoDrop";
 import { publishPost } from "./actions";
 
-export default function PostForm({ storageReady }: { storageReady: boolean }) {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
-  const { photos, addFiles, remove, retry, clear, uploading, skippedMessage } = usePhotoUploads("journal/photos");
+export type PostToEdit = { slug: string; title: string; text: string; images: string[] };
+
+/** Writes a new entry, or with `editing`, changes an existing one. */
+export default function PostForm({ storageReady, editing }: { storageReady: boolean; editing?: PostToEdit }) {
+  const [title, setTitle] = useState(editing?.title ?? "");
+  const [text, setText] = useState(editing?.text ?? "");
+  const { photos, addFiles, remove, retry, clear, uploading, skippedMessage } = usePhotoUploads(
+    "journal/photos",
+    editing?.images.map((url) => ({ url })),
+  );
   const [publishing, setPublishing] = useState(false);
   const [error, setError] = useState("");
   const [publishedSlug, setPublishedSlug] = useState("");
 
   // A stray swipe back on a phone shouldn't throw away a half-written entry.
-  const dirty = !publishedSlug && (photos.length > 0 || title !== "" || text !== "");
+  const snapshot = (t: string, x: string, urls: (string | undefined)[]) => JSON.stringify([t, x, urls]);
+  const [initial] = useState(() => snapshot(editing?.title ?? "", editing?.text ?? "", editing?.images ?? []));
+  const dirty = !publishedSlug && snapshot(title, text, photos.map((p) => p.url)) !== initial;
   useEffect(() => {
     if (!dirty) return;
     const warn = (e: BeforeUnloadEvent) => e.preventDefault();
@@ -27,11 +35,10 @@ export default function PostForm({ storageReady }: { storageReady: boolean }) {
     setPublishing(true);
     setError("");
     try {
-      const result = await publishPost({
-        title,
-        text,
-        images: photos.flatMap((p) => (p.url ? [p.url] : [])),
-      });
+      const result = await publishPost(
+        { title, text, images: photos.flatMap((p) => (p.url ? [p.url] : [])) },
+        editing?.slug,
+      );
       if ("error" in result && result.error) {
         setError(result.error);
       } else if ("slug" in result && result.slug) {
@@ -49,6 +56,22 @@ export default function PostForm({ storageReady }: { storageReady: boolean }) {
     setText("");
     clear();
     setPublishedSlug("");
+  }
+
+  if (publishedSlug && editing) {
+    return (
+      <div className="admin-form">
+        <p className="lead">Your changes are saved and on the site.</p>
+        <p style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+          <Link href={`/journal/${publishedSlug}`} className="btn btn-primary">
+            See it on the site
+          </Link>
+          <Link href="/admin/journal" className="btn btn-secondary">
+            Back to the journal
+          </Link>
+        </p>
+      </div>
+    );
   }
 
   if (publishedSlug) {
@@ -131,8 +154,13 @@ export default function PostForm({ storageReady }: { storageReady: boolean }) {
 
       <div className="admin-submit">
         <button type="submit" className="btn btn-primary" disabled={publishing || uploading}>
-          {publishing ? "Publishing…" : uploading ? "Waiting for photos…" : "Publish"}
+          {publishing ? "Saving…" : uploading ? "Waiting for photos…" : editing ? "Save changes" : "Publish"}
         </button>
+        {editing && (
+          <Link href="/admin/journal" className="btn btn-ghost">
+            Cancel
+          </Link>
+        )}
       </div>
     </form>
   );

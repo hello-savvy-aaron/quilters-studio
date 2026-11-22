@@ -19,8 +19,14 @@ export type Photo = {
  * Photos chosen in the admin forms. Each is converted (HEIC → JPEG, shrunk) and uploaded to Vercel Blob
  * as soon as it's picked, one conversion at a time so a phone doesn't run out of memory.
  */
-export function usePhotoUploads(folder: "journal/photos" | "quilts/photos") {
-  const [photos, setPhotos] = useState<Photo[]>([]);
+export function usePhotoUploads(
+  folder: "journal/photos" | "quilts/photos",
+  /** Photos already saved, when editing. */
+  initial: { url: string; caption?: string }[] = [],
+) {
+  const [photos, setPhotos] = useState<Photo[]>(() =>
+    initial.map((p) => ({ id: crypto.randomUUID(), url: p.url, preview: p.url, caption: p.caption ?? "" })),
+  );
   const [skipped, setSkipped] = useState(false);
   const originals = useRef(new Map<string, File>());
   const prepared = useRef(new Map<string, File>());

@@ -1,12 +1,12 @@
-import { list, put } from "@vercel/blob";
-import { blobConfigured } from "./blob-config";
 import { unstable_cache } from "next/cache";
+import { deleteEntry, deleteUnusedPhotos, readEntries, writeEntry } from "./blob-entries";
 import { journalPosts } from "./quilts";
 
 export type StudioPost = {
   slug: string;
   title: string;
   publishedAt: string;
+  editedAt?: string;
   body: string[];
   images: string[];
 };
@@ -39,12 +39,7 @@ function excerptOf(post: StudioPost) {
 }
 
 async function fetchStudioPosts(): Promise<StudioPost[]> {
-  if (!blobConfigured()) return [];
-  const { blobs } = await list({ prefix: POSTS_PREFIX });
-  const posts = await Promise.all(
-    blobs.map(async (b) => (await fetch(b.url, { cache: "no-store" })).json() as Promise<StudioPost>),
-  );
-  return posts.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  return (await readEntries<StudioPost>(POSTS_PREFIX)).sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
 }
 
 export const getStudioPosts = unstable_cache(fetchStudioPosts, ["studio-posts"], {
@@ -93,10 +88,24 @@ export async function saveStudioPost(input: { title: string; body: string[]; ima
   for (let n = 2; taken.has(slug); n++) slug = `${base}-${n}`;
 
   const post: StudioPost = { slug, publishedAt: new Date().toISOString(), ...input };
-  await put(`${POSTS_PREFIX}${slug}.json`, JSON.stringify(post), {
-    access: "public",
-    contentType: "application/json",
-    addRandomSuffix: false,
-  });
+  await writeEntry(POSTS_PREFIX, post);
   return post;
+}
+
+/** Save changes to an entry. Its address and date stay the same. */
+export async function updateStudioPost(slug: string, input: { title: string; body: string[]; images: string[] }) {
+  const current = (await fetchStudioPosts()).find((p) => p.slug === slug);
+  if (!current) return null;
+  const post: StudioPost = { ...current, ...input, editedAt: new Date().toISOString() };
+  await writeEntry(POSTS_PREFIX, post);
+  await deleteUnusedPhotos(current.images, post.images);
+  return post;
+}
+
+export async function deleteStudioPost(slug: string) {
+  const current = (await fetchStudioPosts()).find((p) => p.slug === slug);
+  if (!current) return false;
+  await deleteEntry(POSTS_PREFIX, slug);
+  await deleteUnusedPhotos(current.images, []);
+  return true;
 }

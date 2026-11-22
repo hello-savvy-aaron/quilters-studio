@@ -13,8 +13,14 @@ pill buttons, and a terracotta accent. Tokens are at the top of `app/globals.css
 - `/about`, `/contact` — About copy and the contact form.
 - `/on-design` — the essay, titled **Talking Design** (the URL is unchanged).
 - `/journal`, `/family-stories` — written on the site.
-- `/admin` — add a quilt (photos, story, optional pull quote/size/year/details) or remove one added there;
-  `/admin/journal` posts journal entries. Both store in Vercel Blob. Quilts added here show on the home page
+- `/admin` — add a quilt (photos, story, optional pull quote/size/year/details), and a list of every quilt on
+  the site with **Edit** (`/admin/quilts/<slug>`). Quilts added here can be removed. The quilts written into
+  `lib/quilts.ts` can be edited too: the edited copy is saved in Blob under the same slug and shown in place of
+  the original, and **Undo my edits** removes it so the original comes back.
+- `/admin/journal` — write an entry, and edit (`/admin/journal/<slug>`) or delete the ones written there. An admin
+  also sees **Edit this entry** on the entry's own page. Editing keeps an entry's address and date.
+- Saved records go through `lib/blob-entries.ts`: each save writes a new file and deletes the old one (Blob's CDN
+  can serve a stale copy of an overwritten file), and photos an edit drops are deleted from Blob. Both store in Vercel Blob. Quilts added here show on the home page
   after the ones in `lib/quilts.ts`. Built for a phone: iPhone HEIC photos are converted to JPEG in the browser
   (Safari does it natively; other browsers load the `heic-to` decoder only when needed), turned the right way up,
   and shrunk to 2400px on the long edge before uploading (`app/admin/prepare-photo.ts`).

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import { formatDate, getStudioPost } from "@/lib/journal";
+import { isAdmin } from "@/lib/admin";
 
 type Params = { slug: string };
 
@@ -15,6 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 export default async function JournalPostPage({ params }: { params: Promise<Params> }) {
   const post = await getStudioPost((await params).slug);
   if (!post) notFound();
+  const admin = await isAdmin();
 
   return (
     <>
@@ -46,6 +48,11 @@ export default async function JournalPostPage({ params }: { params: Promise<Para
           <Link className="pill" href="/journal">
             <span aria-hidden="true">←</span> All entries
           </Link>
+          {admin && (
+            <Link className="pill" href={`/admin/journal/${post.slug}`}>
+              Edit this entry
+            </Link>
+          )}
         </nav>
       </main>
     </>

@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { adminIpsConfigured, clientIp, isAdmin } from "@/lib/admin";
 import { blobConfigured } from "@/lib/blob-config";
-import { getStudioQuilts } from "@/lib/studio-quilts";
+import { getAdminQuilts } from "@/lib/studio-quilts";
 import PageHero from "@/components/PageHero";
 import { HELLO_SAVVY, HELLO_SAVVY_URL } from "@/lib/credits";
 import QuiltForm from "./QuiltForm";
-import RemoveQuiltButton from "./RemoveQuiltButton";
+import RemoveButton from "./RemoveButton";
 
 export const metadata: Metadata = {
   title: "Admin",
@@ -25,7 +25,7 @@ export default async function AdminPage() {
     );
   }
 
-  const added = await getStudioQuilts();
+  const all = await getAdminQuilts();
 
   return (
     <>
@@ -35,25 +35,47 @@ export default async function AdminPage() {
           <QuiltForm storageReady={blobConfigured()} />
         </div>
 
-        {added.length > 0 && (
-          <div className="panel" style={{ marginTop: 32 }}>
-            <h2 className="panel-heading">Quilts added here</h2>
-            <ul className="admin-list">
-              {added.map((q) => (
-                <li key={q.slug}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  {q.photos[0] && <img src={q.photos[0].src} alt="" />}
-                  <Link href={`/#${q.slug}`}>{q.title}</Link>
-                  <RemoveQuiltButton slug={q.slug} title={q.title} />
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div className="panel" style={{ marginTop: 32 }} id="quilts">
+          <h2 className="panel-heading">Quilts on the site</h2>
+          <p className="muted admin-hint">Tap a quilt to change its photos, story or details.</p>
+          <ul className="admin-list">
+            {all.map((q) => (
+              <li key={q.slug}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                {q.photos[0] && <img src={q.photos[0].src} alt="" />}
+                <Link href={`/admin/quilts/${q.slug}`}>
+                  {q.title}
+                  {q.edited && <span className="chip admin-chip">Edited</span>}
+                </Link>
+                <span className="admin-photo-actions">
+                  <Link href={`/admin/quilts/${q.slug}`} className="btn btn-ghost">
+                    Edit
+                  </Link>
+                  {!q.builtIn && (
+                    <RemoveButton
+                      kind="quilt"
+                      slug={q.slug}
+                      label="Remove"
+                      confirmText={`Take “${q.title}” off the site? Its photos will be deleted too.`}
+                    />
+                  )}
+                  {q.edited && (
+                    <RemoveButton
+                      kind="quilt"
+                      slug={q.slug}
+                      label="Undo my edits"
+                      confirmText={`Put “${q.title}” back the way it was originally? Your changes to it will be lost.`}
+                    />
+                  )}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
         <p style={{ marginTop: 32 }}>
           <Link href="/admin/journal" className="btn btn-secondary">
-            Write a journal entry instead
+            Journal entries: write or edit
           </Link>
         </p>
         <p className="muted admin-help">
